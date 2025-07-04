@@ -62,7 +62,8 @@ be extended to compound expressions using the syntax: \texttt{let \textit{name1}
 \begin{lstlisting}
     # let x = 200 in x * x * x;;
     # let a = 500 in (let b = a * a in a + b);;
-\end{lstlisting}.
+\end{lstlisting}. The rightmost expression will be fully evaluated first, even if brackets aren't explicitly
+written.
 
 A \textit{function} takes some input, called an \textit{arguement}, and evaluates to some value. These are
 created using the syntax: \texttt{let \textit{name arguement1 arguement2} ... = \textit{expression}}.
