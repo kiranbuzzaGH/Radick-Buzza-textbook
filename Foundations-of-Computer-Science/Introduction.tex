@@ -11,8 +11,7 @@
     Introduction
 \end{center}
 
-\section{Basic syntax}
-This course uses OCaml to teach programming fundamentals. Covered here are the basics of the syntax.
+This course uses OCaml to teach programming fundamentals.
 
 Once installed, one can enter use OCaml in the terminal by typing OCaml and writing your expression
 after the \texttt{\#}. An expression should be ended with \texttt{;;}.
@@ -29,12 +28,12 @@ The type \textbf{int} is the integers. Your machine will have a so called \textt
 are the smallest and largest integer that is available, respectively. Adding to \texttt{max\_int} will
 wrap back around to \texttt{min\_int} as \texttt{min\_int = max\_int + 1}. A similar situation occurs when
 subtracting from \texttt{min\_int}. Thus, the integers from \texttt{min\_int, ..., -1, 0, 1, ..., max\_int} is
-are all of the objects with type \textbf{int}. It is worth being careful when working close to the edges of this range
+are \textit{all} of the objects with type \textbf{int}. It is worth being careful when working close to the edges of this range
 to prevent unexpected results.
 
 The type \textbf{bool} is the Boolean values \texttt{true} and \texttt{false}. It is useful to have
 a separate type for Booleans rather than using, say, \texttt{0} and \texttt{1} as this would introduce
-potential situations where a non \texttt{0} or \texttt{1} value is returned inintentionally and acts
+potential situations where a non \texttt{0} or \texttt{1} value is unintentionally returned. This acts
 to prevent unnecessary errors. This is possible as OCaml has a strict type system.
 
 The type \textbf{char} is single characters, for example \texttt{'a'}, \texttt{'!'} and \texttt{'E'}.
@@ -43,9 +42,8 @@ Mathematical operators only act between expressions of type \textbf{int}. These 
 The result of such an expression will also have type \textbf{int} (remember this when using division operations).
 
 Comparison operators compare expressions of the same type. This means that Booleans and characters can
-aslo be compared (try this to see the relative values of uppercase and lowercase charaters, and \texttt{true}
-and \texttt{false}). These are \texttt{= < <= > >= <>} where \texttt{<>}
-is the operator for "not equal to" in OCaml. The result of such an expression will have type \textbf{bool}.
+also be compared. These are \texttt{= < <= > >= <>} (where \texttt{<>}
+is the operator for "not equal to" in OCaml). The result of such an expression will have type \textbf{bool}.
 
 Boolean operators \texttt{\&\&} and \texttt{||} are "and" and "or" respectively and compare expressions
 of type \textbf{bool}.
@@ -53,8 +51,10 @@ of type \textbf{bool}.
 Operators of higher precedence are evaluated first. For example, \texttt{*} has precedence over \texttt{+}
 and "and" has precedence over "or". Otherwise, operators are evaluated from left to right.
 
-If statements have the following syntax: \texttt{\textbf{if} \textit{expression1} \textbf{then}
+\textit{If statements} have the following syntax: \texttt{\textbf{if} \textit{expression1} \textbf{then}
 \textit{expression2} \textbf{else} \textit{expression3}} where \textit{expression1} has type \textbf{bool}, and
 \textit{expression2} and \textit{expression3} have the same type.
+
+\section{Names and Functions}
 
 \end{document}
