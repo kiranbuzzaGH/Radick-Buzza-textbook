@@ -56,5 +56,26 @@ and "and" has precedence over "or". Otherwise, operators are evaluated from left
 \textit{expression2} and \textit{expression3} have the same type.
 
 \section{Names and Functions}
+One can assign a value to a name using the syntax: \texttt{let \textit{name} = \text{expression}}. This can
+be extended to compound expressions using the syntax: \texttt{let \textit{name1} = \textit{expression1} in let \textit{name1}
+= \textit{expression2} in ...}. For example:
+\begin{lstlisting}
+    # let x = 200 in x * x * x;;
+    # let a = 500 in (let b = a * a in a + b);;
+\end{lstlisting}.
+
+A \textit{function} takes some input, called an \textit{arguement}, and evaluates to some value. These are
+created using the syntax: \texttt{let \textit{name arguement1 arguement2} ... = \textit{expression}}.
+This function has type $\alpha \rightarrow \beta$, $\alpha \rightarrow \beta \rightarrow \gamma$ etc. for
+some types $\alpha$, $\beta$,$\gamma$, where the rightmost type corresponds to the type of the value of
+the function and the other types correspond to those of the arguements respectively. For example:
+\begin{lstlisting}
+    # let cube x = x * x * x
+    val cube : int -> int = <fun>
+\end{lstlisting}
+where the second line shows the output by the OCaml interpreter, making the type of the function explicit.
+
+In OCaml, whitespace (notably indentation) is used purely to aid readability.
+
 
 \end{document}
