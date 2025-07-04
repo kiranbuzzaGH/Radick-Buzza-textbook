@@ -1,0 +1,47 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\newtheorem{axiom}{Axiom}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    Sets, Relations and Functions
+\end{center}
+
+\section{The Axiom of Extension}
+Sets (or collections) have elements (or members). Any object (concrete or otherwise), may be an element
+of a set. This extends to sets, which may be an element of some other set. In fact, it is generally sufficient
+to only discuss sets of sets, as the properties will extend to all other sets. There are some ways to relate sets: belonging, inclusion and equality.
+
+If an object $x$ is an element of set $A$, we say that it \textit{belongs} to $A$, or "$x$ is contained
+in $A$". Denote this as $x$ $\epsilon$ $A$.
+
+If a set $A$ is \textit{included} in some set $B$, then $A$ is a subset of $B$. Denote this as $A \subset B$ or
+$B \supset A$. Some related definitions: set inclusion is \textit{reflexive} since a set is included in
+itself ($A \subset A$); set inclusion is \textit{transistive} as $A \subset B$ and $B \subset C$ implies
+$A \subset C$. (Conversely, belonging is neither reflexive or transistive).
+
+Sets can also be related by equality ($A = B$), as defined by the Axiom of Extension.
+\begin{axiom}[Axiom of Extension]
+    Two sets are equal if and only if they have the same elements.
+\end{axiom}
+In terms of  inclusion, this can be rewritten as "$A \subset B$ and $B \subset A \Leftrightarrow A = B$".
+
+A set is said to be a \textit{proper} subset of another if $A \subset B$ and $A \neq B$, that is, all
+subsets are proper except from the set itslf, which is a subset but not proper.
+
+Equality is \textit{symmetric}, that is $A = B \Leftrightarrow B = A$, whereas set inclusion is \textit{antisymmetric}
+(that is, $A \subset B$ and $B \subset A \Rightarrow A = B$).
+
+
+
+
+
+
+\end{document}
