@@ -6,6 +6,7 @@
 \usepackage{listings}
 
 \newtheorem{axiom}{Axiom}
+\newtheorem{remark}{Remark}
 
 
 \begin{document}
@@ -33,7 +34,7 @@ Sets can also be related by equality ($A = B$), as defined by the Axiom of Exten
 \end{axiom}
 In terms of  inclusion, this can be rewritten as "$A \subset B$ and $B \subset A \Leftrightarrow A = B$".
 
-A set is said to be a \textit{proper} subset of another if $A \subset B$ and $A \neq B$, that is, all
+A set is said to be a \textit{proper} subset of another if $A \subset B$ and $A \neq B$; that is, all
 subsets are proper except from the set itslf, which is a subset but not proper.
 
 Equality is \textit{symmetric}, that is $A = B \Leftrightarrow B = A$, whereas set inclusion is \textit{antisymmetric}
@@ -41,8 +42,60 @@ Equality is \textit{symmetric}, that is $A = B \Leftrightarrow B = A$, whereas s
 some binary relation R.}.
 
 \section{The Axiom of Specification}
+The basis of most Set Theoretic principles is to construct new sets from old sets. The most important such principle
+is the so called "\textit{Aussonderungsaxiom}":
+\begin{axiom}[Axiom of Specification]
+    To every set A and every condition S(x) there correponds a set B whose elements are exactly those
+    elements x of A for which S(x) holds.
+\end{axiom}
+That is to say, anything one can say about a the elements of a set defines a subset. The condition must form a
+valid \textit{sentence}. A sentence is formed using the atomic sentences of belonging ($x$ $\epsilon$ $A$)
+and equality ($A = B$), which are used to create more specific sentences using the following logical operators:
+\begin{itemize}
+    \item and
+    \item or
+    \item if and only if
+    \item not
+    \item if - then - (equivalently \textit{implies})
+    \item for some (equivalently \textit{there exists})
+    \item for all.
+\end{itemize}
+There are a few general rules for sentence construction\footnote{Some general notes: the set of a single object is not the same as that object itself;
+"for some $y$ ($x$ $\epsilon$ $A$)" is equivalent to "$x$ $\epsilon$ $A$"; "for some $x$ ($x$ $\epsilon$ $A$)" and
+"for some $y$ ($y$ $\epsilon$ $A$)" are equivalent.}:
+\begin{enumerate}
+    \item \textit{and}, \textit{or} and \textit{if and only if} are placed between two sentences
+    \item \textit{not} can be placed before a sentence enclosed by parentheses
+    \item the dashes in \textit{if - then - } are replaced with sentences
+    \item follow \textit{for some} or \textit{for all} by a letter, in turn followed by a sentence
+\end{enumerate}
 
+We can write the Axiom of Specification symbolically as: $B = \{x \text{ }\epsilon \text{ }A: S(x)\}$. This set $B$ is uniquely
+specified due to the Axiom of Extension.
 
+\begin{remark}[Russell paradox]
+    Nothing contains everything (or equivalently, there is no universe)
+\end{remark}
+\begin{proof}
+    Assume there is a set $A$ which contains everything.
+
+    Consider the condition: $\text{not } (x \text{ } \epsilon \text{ } x)$. Let us rewrite this as ($x$ $\epsilon'$ $x$) for
+    ease of use.
+
+    Constructing the set $B$ from $A$ where this condition holds:
+    \begin{equation}
+        B = \{x \text{ } \epsilon \text{ } A: x \text{ } \epsilon' \text{ } x\}
+    \end{equation}
+
+    Following from the Axiom of Extension,
+    \begin{equation}
+        y \text{ } \epsilon \text{ } B \text{ if and only if } (y \text{ } \epsilon \text{ } A \text{ and } y \text{ } \epsilon' \text{ } y)
+    \end{equation}
+
+    For $A$ to contain everything, this must hold for any $y$. Consider $y = B$.
+    If $B$ $\epsilon$ $A$, then $B$ $\epsilon$ $B \Leftrightarrow B$ $\epsilon'$ $B$. This is clearly a
+    contradiction so $A$ does not contain $B$ and by extension, $A$ cannot contain everything.
+\end{proof}
 
 
 
