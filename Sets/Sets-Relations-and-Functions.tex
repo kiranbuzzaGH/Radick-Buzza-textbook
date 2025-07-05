@@ -1,6 +1,7 @@
 \documentclass[12pt]{article}
 \usepackage{amsmath}
 \usepackage{amsthm}
+\usepackage{amssymb}
 \usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
 \usepackage{graphicx}
 \usepackage{listings}
@@ -83,21 +84,65 @@ specified due to the Axiom of Extension.
     ease of use.
 
     Constructing the set $B$ from $A$ where this condition holds:
-    \begin{equation}
+    \begin{displaymath}
         B = \{x \text{ } \epsilon \text{ } A: x \text{ } \epsilon' \text{ } x\}
-    \end{equation}
+    \end{displaymath}
 
     Following from the Axiom of Extension,
-    \begin{equation}
+    \begin{displaymath}
         y \text{ } \epsilon \text{ } B \text{ if and only if } (y \text{ } \epsilon \text{ } A \text{ and } y \text{ } \epsilon' \text{ } y)
-    \end{equation}
+    \end{displaymath}
 
     For $A$ to contain everything, this must hold for any $y$. Consider $y = B$.
     If $B$ $\epsilon$ $A$, then $B$ $\epsilon$ $B \Leftrightarrow B$ $\epsilon'$ $B$. This is clearly a
     contradiction so $A$ does not contain $B$ and by extension, $A$ cannot contain everything.
 \end{proof}
 
+The Russell Paradox gives us an example of a condition that produces an illegal set. Some texts name these
+illegal sets as "classes".
 
+\section{Unordered Pairs}
+In order to make any progress it is necessary for us to make an assumption: \textit{there exists a set}.
+This will be formulated more carefully later on but for now this is sufficient.
 
+One can easily construct the \textit{empty set} using the condition $x \neq x$. Clearly there are no
+elements of such a set. Denote this as $\{x \text{ } \epsilon \text{ } A: x \neq x \} = \varnothing$.
+
+For any set $A$, $\varnothing \subset A$ as every element in $\varnothing$ is in $A$. This is a vacuous truth.\footnote{The
+arguement can also be made from the other direction: the only case where $\varnothing \subset A$ is false
+is where there is some element in $\varnothing$ that is not contained in $A$. Since $\varnothing$ is empty, this
+doesn't make any sense and so the statement can never be false.}
+
+\begin{axiom}[Axiom of Pairing]
+    For any two sets there exists a set that they both belong to.
+\end{axiom}
+That is, for some sets $a$ and $b$, there exists a set $A$ such that $a \text{ } \epsilon \text{ } A \text{ and } b \text{ }
+\epsilon \text{ } A$. This is actually a special case of the Axiom of Specification\footnote{Reformulate the Axiom of Pairing as $x \;
+\epsilon \; B \text{ if and only if } S(x)$, where $S(x) = "x = a \text{ or } x = b"$, to more easily compare. Think more about this.}.
+
+Consider the set that contains $a$ and $b$ and nothing else\footnote{The existance of such a set is actually equivalent to the Axiom of Pairing}.
+This can be constructed from the Axiom of Specification using the condition $S(x) =
+"x = a \text{ or } x = b"$. By the Axiom of Extension, this set is unique. We call this the \textit{pair}
+or, more specifically, the \textit{unordered pair} formed by $a$ and $b$. Denote this set as
+\begin{equation}
+    \{x \; \epsilon \; A: x = a \text{ or } x = b\} = \{a, b\}
+\end{equation}.
+
+The \textit{singleton} of $a$ is a special case unordered pair $\{a, a\}$, denoted by $\{a\}$, where the set has $a$
+as its only element. $a \; \epsilon \; A$ is equivalent to $\{a\} \subset A$.
+
+Considering the unordered pair of any set and the empty set, it follows from the Axiom of Pairing
+that every set is an element of some other set. We can also infer the existance of infinitely many sets by construction:
+first consider the singletons $\varnothing, \{\varnothing\}, \{\{\varnothing\}\}$ etc.; now consider the pairs of such sets, and the
+pairs of these and the singletons and so on. Note that not all of these sets are unique ($\{\varnothing, \{\varnothing\}\} = \varnothing$, for example).
+
+Let us introduce new notation: if $S(x)$ is a condition on $x$, then denote the set by $\{x:S(x)\}$. For example
+\begin{displaymath}
+    \begin{aligned}
+        \{x: x \; \epsilon\; A\} = A,\\
+        \{x: x \neq x\} = \varnothing,\\
+        \{x: x = a\} = \{a\}.
+    \end{aligned}
+\end{displaymath}
 
 \end{document}
