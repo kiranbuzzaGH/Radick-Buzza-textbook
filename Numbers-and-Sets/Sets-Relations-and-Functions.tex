@@ -1,0 +1,153 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+\newtheorem{axiom}{Axiom}
+\newtheorem{remark}{Remark}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    Sets, Relations and Functions
+\end{center}
+
+\section{The Axiom of Extension}
+Sets (or collections) have elements (or members). Any object (concrete or otherwise), may be an element
+of a set. This extends to sets, which may be an element of some other set. In fact, it is generally sufficient
+to only discuss sets of sets, as the properties will extend to all other sets. There are some ways to relate sets: belonging, inclusion and equality.
+
+If an object $x$ is an element of set $A$, we say that it \textit{belongs} to $A$, or "$x$ is contained
+in $A$". Denote this as $x$ $\epsilon$ $A$.
+
+If a set $A$ is \textit{included} in some set $B$, then $A$ is a subset of $B$. Denote this as $A \subset B$ or
+$B \supset A$. Some related definitions: set inclusion is \textit{reflexive} since a set is included in
+itself ($A \subset A$)\footnote{Clearly, $A \subset B$ is the same as $A \subseteq B$ in this notation.}; set inclusion is \textit{transistive} as $A \subset B$ and $B \subset C$ implies
+$A \subset C$. (Conversely, belonging is neither reflexive or transistive).
+
+Sets can also be related by equality ($A = B$), as defined by the Axiom of Extension.
+\begin{axiom}[Axiom of Extension]
+    Two sets are equal if and only if they have the same elements.
+\end{axiom}
+In terms of  inclusion, this can be rewritten as "$A \subset B$ and $B \subset A \Leftrightarrow A = B$".
+
+A set is said to be a \textit{proper} subset of another if $A \subset B$ and $A \neq B$; that is, all
+subsets are proper except from the set itslf, which is a subset but not proper.
+
+Equality is \textit{symmetric}, that is $A = B \Leftrightarrow B = A$, whereas set inclusion is \textit{antisymmetric}
+(that is, $A \subset B$ and $B \subset A \Rightarrow A = B$)\footnote{Antisymmetry is defined by "if $aRb$ and $bRa$, then $a = b$" for
+some binary relation R.}.
+
+\section{The Axiom of Specification}
+The basis of most Set Theoretic principles is to construct new sets from old sets. The most important such principle
+is the so called "\textit{Aussonderungsaxiom}":
+\begin{axiom}[Axiom of Specification]
+    To every set A and every condition S(x) there correponds a set B whose elements are exactly those
+    elements x of A for which S(x) holds.
+\end{axiom}
+That is to say, anything one can say about a the elements of a set defines a subset. The condition must form a
+valid \textit{sentence}. A sentence is formed using the atomic sentences of belonging ($x$ $\epsilon$ $A$)
+and equality ($A = B$), which are used to create more specific sentences using the following logical operators:
+\begin{itemize}
+    \item and
+    \item or
+    \item if and only if
+    \item not
+    \item if - then - (equivalently \textit{implies})
+    \item for some (equivalently \textit{there exists})
+    \item for all.
+\end{itemize}
+There are a few general rules for sentence construction\footnote{Some general notes: the set of a single object is not the same as that object itself;
+"for some $y$ ($x$ $\epsilon$ $A$)" is equivalent to "$x$ $\epsilon$ $A$"; "for some $x$ ($x$ $\epsilon$ $A$)" and
+"for some $y$ ($y$ $\epsilon$ $A$)" are equivalent.}:
+\begin{enumerate}
+    \item \textit{and}, \textit{or} and \textit{if and only if} are placed between two sentences
+    \item \textit{not} can be placed before a sentence enclosed by parentheses
+    \item the dashes in \textit{if - then - } are replaced with sentences
+    \item follow \textit{for some} or \textit{for all} by a letter, in turn followed by a sentence
+\end{enumerate}
+
+We can write the Axiom of Specification symbolically as: $B = \{x \text{ }\epsilon \text{ }A: S(x)\}$. This set $B$ is uniquely
+specified due to the Axiom of Extension.
+
+\begin{remark}[Russell paradox]
+    Nothing contains everything (or equivalently, there is no universe)
+\end{remark}
+\begin{proof}
+    Assume there is a set $A$ which contains everything.
+
+    Consider the condition: $\text{not } (x \text{ } \epsilon \text{ } x)$. Let us rewrite this as ($x$ $\epsilon'$ $x$) for
+    ease of use.
+
+    Constructing the set $B$ from $A$ where this condition holds:
+    \begin{displaymath}
+        B = \{x \text{ } \epsilon \text{ } A: x \text{ } \epsilon' \text{ } x\}
+    \end{displaymath}
+
+    Following from the Axiom of Extension,
+    \begin{displaymath}
+        y \text{ } \epsilon \text{ } B \text{ if and only if } (y \text{ } \epsilon \text{ } A \text{ and } y \text{ } \epsilon' \text{ } y)
+    \end{displaymath}
+
+    For $A$ to contain everything, this must hold for any $y$. Consider $y = B$.
+    If $B$ $\epsilon$ $A$, then $B$ $\epsilon$ $B \Leftrightarrow B$ $\epsilon'$ $B$. This is clearly a
+    contradiction so $A$ does not contain $B$ and by extension, $A$ cannot contain everything.
+\end{proof}
+
+The Russell Paradox gives us an example of a condition that produces an illegal set. Some texts name these
+illegal sets as "classes".
+
+\section{Unordered Pairs}
+In order to make any progress it is necessary for us to make an assumption: \textit{there exists a set}.
+This will be formulated more carefully later on but for now this is sufficient.
+
+Given the assumption that there exists a set, one can easily construct the \textit{empty set} using the
+Axiom of Specification, using the condition $x \neq x$. Clearly there are no
+elements of such a set. This set is unique by the Axiom of Extension. Denote this as $\{x \text{ } \epsilon \text{ } A: x \neq x \} = \varnothing$.
+
+For any set $A$, $\varnothing \subset A$ as every element in $\varnothing$ is in $A$. This is a vacuous truth.\footnote{The
+arguement can also be made from the other direction: the only case where $\varnothing \subset A$ is false
+is where there is some element in $\varnothing$ that is not contained in $A$. Since $\varnothing$ is empty, this
+doesn't make any sense and so the statement can never be false.}
+
+\begin{axiom}[Axiom of Pairing]
+    For any two sets there exists a set that they both belong to.
+\end{axiom}
+That is, for some sets $a$ and $b$, there exists a set $A$ such that $a \text{ } \epsilon \text{ } A \text{ and } b \text{ }
+\epsilon \text{ } A$.
+
+Consider the set that contains $a$ and $b$ and nothing else\footnote{The existance of such a set is actually equivalent to the Axiom of Pairing:
+if there is some set $A$ such that $a \; \epsilon \; A$ and $b \; \epsilon \; A$, then we can construct
+a set with only $a$ and $b$ in using the sentence "$x = a \text{ or } x = b$".}.
+This can be constructed from the Axiom of Specification using the condition $S(x) =
+"x = a \text{ or } x = b"$. By the Axiom of Extension, this set is unique. We call this the \textit{pair}
+or, more specifically, the \textit{unordered pair} formed by $a$ and $b$. Denote this set as
+\begin{equation}
+    \{x \; \epsilon \; A: x = a \text{ or } x = b\} = \{a, b\}.
+\end{equation}
+Note that this isn't the same as the set of all elements in $a$ or $b$ but the set containing only two
+elements: $a$ and $b$.
+
+The \textit{singleton} of $a$ is a special case unordered pair $\{a, a\}$, denoted by $\{a\}$, where the set has $a$
+as its only element. $a \; \epsilon \; A$ is equivalent to $\{a\} \subset A$.
+
+Considering the unordered pair of any set and the empty set, it follows from the Axiom of Pairing
+that every set is an element of some other set. We can also infer the existance of infinitely many sets by construction:
+first consider the singletons $\varnothing, \{\varnothing\}, \{\{\varnothing\}\}$ etc.; now consider the pairs of such sets, and the
+pairs of these and the singletons and so on. Note that all of these sets are unique by the Axiom of Extension.
+
+If $S(x)$ is a condition on $x$, then the set of all $x$ that satisfy this condition is given by $\{x:S(x)\}$,
+granted that this is a valid set. Rewriting the generic set constructed by the Axiom of Specification,
+\begin{displaymath}
+    \{x\;\epsilon\;A: S(x)\} = \{x: x\;\epsilon\;A \text{ and } S(x)\}.
+\end{displaymath}
+
+\section{Unions and Intersections}
+
+
+
+\end{document}
