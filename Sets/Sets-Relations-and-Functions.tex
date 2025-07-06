@@ -105,8 +105,9 @@ illegal sets as "classes".
 In order to make any progress it is necessary for us to make an assumption: \textit{there exists a set}.
 This will be formulated more carefully later on but for now this is sufficient.
 
-One can easily construct the \textit{empty set} using the condition $x \neq x$. Clearly there are no
-elements of such a set. Denote this as $\{x \text{ } \epsilon \text{ } A: x \neq x \} = \varnothing$.
+Given the assumption that there exists a set, one can easily construct the \textit{empty set} using the
+Axiom of Specification, using the condition $x \neq x$. Clearly there are no
+elements of such a set. This set is unique by the Axiom of Extension. Denote this as $\{x \text{ } \epsilon \text{ } A: x \neq x \} = \varnothing$.
 
 For any set $A$, $\varnothing \subset A$ as every element in $\varnothing$ is in $A$. This is a vacuous truth.\footnote{The
 arguement can also be made from the other direction: the only case where $\varnothing \subset A$ is false
@@ -117,16 +118,17 @@ doesn't make any sense and so the statement can never be false.}
     For any two sets there exists a set that they both belong to.
 \end{axiom}
 That is, for some sets $a$ and $b$, there exists a set $A$ such that $a \text{ } \epsilon \text{ } A \text{ and } b \text{ }
-\epsilon \text{ } A$. This is actually a special case of the Axiom of Specification\footnote{Reformulate the Axiom of Pairing as $x \;
-\epsilon \; B \text{ if and only if } S(x)$, where $S(x) = "x = a \text{ or } x = b"$, to more easily compare. Think more about this.}.
+\epsilon \text{ } A$.
 
-Consider the set that contains $a$ and $b$ and nothing else\footnote{The existance of such a set is actually equivalent to the Axiom of Pairing}.
+Consider the set that contains $a$ and $b$ and nothing else\footnote{The existance of such a set is actually equivalent to the Axiom of Pairing:
+if there is some set $A$ such that $a \; \epsilon \; A$ and $b \; \epsilon \; A$, then we can construct
+a set with only $a$ and $b$ in using the sentence "$x = a \text{ or } x = b$".}.
 This can be constructed from the Axiom of Specification using the condition $S(x) =
 "x = a \text{ or } x = b"$. By the Axiom of Extension, this set is unique. We call this the \textit{pair}
 or, more specifically, the \textit{unordered pair} formed by $a$ and $b$. Denote this set as
 \begin{equation}
-    \{x \; \epsilon \; A: x = a \text{ or } x = b\} = \{a, b\}
-\end{equation}.
+    \{x \; \epsilon \; A: x = a \text{ or } x = b\} = \{a, b\}.
+\end{equation}
 Note that this isn't the same as the set of all elements in $a$ or $b$ but the set containing only two
 elements: $a$ and $b$.
 
@@ -138,13 +140,14 @@ that every set is an element of some other set. We can also infer the existance 
 first consider the singletons $\varnothing, \{\varnothing\}, \{\{\varnothing\}\}$ etc.; now consider the pairs of such sets, and the
 pairs of these and the singletons and so on. Note that all of these sets are unique by the Axiom of Extension.
 
-Let us introduce new notation: if $S(x)$ is a condition on $x$, then denote the set by $\{x:S(x)\}$. For example
+If $S(x)$ is a condition on $x$, then the set of all $x$ that satisfy this condition is given by $\{x:S(x)\}$,
+granted that this is a valid set. Rewriting the generic set constructed by the Axiom of Specification,
 \begin{displaymath}
-    \begin{aligned}
-        \{x: x \; \epsilon\; A\} = A,\\
-        \{x: x \neq x\} = \varnothing,\\
-        \{x: x = a\} = \{a\}.
-    \end{aligned}
+    \{x\;\epsilon\;A: S(x)\} = \{x: x\;\epsilon\;A \text{ and } S(x)\}.
 \end{displaymath}
+
+\section{Unions and Intersections}
+
+
 
 \end{document}
