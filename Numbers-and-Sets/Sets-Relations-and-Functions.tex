@@ -147,7 +147,154 @@ granted that this is a valid set. Rewriting the generic set constructed by the A
 \end{displaymath}
 
 \section{Unions and Intersections}
+\begin{axiom}[Axiom of Unions]
+    For every collection of sets there exists a set that contains all the elements that belong to at least
+    one set of the given collection.
+\end{axiom}
+In other words, let $x\;\epsilon\;U$ only if $x\;\epsilon\;X$ for some $X$ in collection $\mathcal{C}$\footnote{Set and collection
+can be used interchangably but both are used here to make it easier to discern what is being referred to.}. Currently, this set $U$
+could contain elements not belonging to any of the sets in the collection. To construct a set that only contains elements belonging to some set in
+$\mathcal{C}$, use the Axiom of Specification with the condition:
+\begin{displaymath}
+    \{x\;\epsilon\;U: x\;\epsilon\;X \text{ for some } X \text{ in } \mathcal{C}\}
+\end{displaymath}
+Change the notation and name this new set $U$. This set is the \textit{union} of the collection of sets (that
+is the set of sets) $\mathcal{C}$, which is unique by the Axiom of Extension. Denote this as
+\begin{equation}
+    \bigcup\;\{X: X\;\epsilon\;\mathcal{C}\}.
+\end{equation}
 
+We shall now prove various facts regarding unions.
+\begin{remark}
+    $\bigcup\;\{X: X\;\epsilon\;\varnothing\} = \varnothing$
+\end{remark}
+\begin{proof}
+    $\bigcup\;\{X: X\;\epsilon\;\varnothing\}$ is the set of all elements of the sets that are, in turn,
+    elements of $\varnothing$. This set has no elements, so by extension the set of these non-existant
+    sets is also empty.
+\end{proof}
 
+\begin{remark}
+    $\bigcup\;\{X: X\;\epsilon\;\{A\}\} = A$
+\end{remark}
+\begin{proof}
+    Similarly, $\bigcup\;\{X: X\;\epsilon\;\{A\}\}$ is the set of all elements in each set in the
+    collection $\{A\}$. As this is a singleton, this is just the set $A$, by definition.
+\end{proof}
+
+There is special notation for the union of pairs of sets:
+\begin{equation}
+    \bigcup\;\{X: X\;\epsilon\;\{A, B\}\} = A \cup B.
+\end{equation}
+
+\begin{remark}
+    $x\;\epsilon\;A \cup B \text{ if and only if } x\;\epsilon\;A \text{ or } x\;\epsilon\;B$
+\end{remark}
+\begin{proof}
+    If $x\;\epsilon\;A \text{ or } x\;\epsilon\;B$, by definition $x\;\epsilon\;\{A, B\}$ so $x\;\epsilon\;A \cup B$
+    immediately follows.
+
+    If $x\;\epsilon\;A \cup B$, then the definition of the union states that $x\;\epsilon\;X$ for some
+    $X \text{ in } \{A, B\}$. This is equivalent to saying $x\;\epsilon\;A \text{ or } x\;\epsilon\;B$.
+\end{proof}
+
+Thus, we can write:
+\begin{equation}
+    A \cup B = \{x: x\;\epsilon\;A \text{ or } x\;\epsilon\;B\}.
+\end{equation}
+
+Using this, we prove the following elementary properties of the union of pairs:
+\begin{remark}
+    $A \cup\varnothing = A$
+\end{remark}
+\begin{proof}
+    \begin{displaymath}
+        A \cup \varnothing = \{x: x\;\epsilon\;A \text{ or } x\;\epsilon\;\varnothing\}
+    \end{displaymath}
+    $x\;\epsilon\;\varnothing$ is always false so
+    \begin{displaymath}
+        A \cup \varnothing = \{x: x\;\epsilon\;A\} = A
+    \end{displaymath}
+\end{proof}
+
+\begin{remark}[Commutativity]
+    $A \cup B = B \cup A$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        A \cup B &= \{x: x\;\epsilon\;A \text{ or } x\;\epsilon\;B\}\\
+                 &= \{x: x\;\epsilon\;B \text{ or } x\;\epsilon\;A\}\\
+                 &= B \cup A
+    \end{align*}
+    where we use the fact that the logical operator \textit{or} is commutative.
+\end{proof}
+
+\begin{remark}[Associativity]
+    $A \cup (B \cup C) = (A \cup B) \cup C$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        A \cup (B \cup C) &= A \cup (\{x: x\;\epsilon\;B \text{ or } x\;\epsilon\;C\})\\
+                          &= \{x: x\;\epsilon\;A \text{ or } (x\;\epsilon\;B \text{ or } x\;\epsilon\;C)\}\\
+                          &= \{x: (x\;\epsilon\;A \text{ or } x\;\epsilon\;B) \text{ or } x\;\epsilon\;C\}\\
+                          &= (A \cup B) \cup C
+    \end{align*}
+    where we used the fact that the logical operator \textit{or} is associative.
+\end{proof}
+
+\begin{remark}[Idempotence]
+    $A \cup A = A$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        A \cup A &= \{x: x\;\epsilon\;A \text{ or } x\;\epsilon\;A\}\\
+                 &= \{x: x\;\epsilon\;A\}\\\
+                 &= A
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    $A \subset B \text{ if and only if } A \cup B = B$
+\end{remark}
+\begin{proof}
+    If $A \cup B = \{x: x\;\epsilon\;A\text{ or } x\;\epsilon\;B\} = B$, then there must be no case
+    where $x\;\epsilon\;A$ where $x\;\epsilon\;B$ is not also true.
+    Thus, any element $x\;\epsilon\;A$ must also be in $B$, so $A \subset B$ by definition.
+
+    If $A\subset B$, every element in $A$ is also in $B$. Thus,
+    \begin{align*}
+        A \cup B &= \{x: x\;\epsilon\;A\text{ or } x\;\epsilon\;B\}\\
+                 &= \{x: x\;\epsilon\;B\}\\
+                 &= B.
+    \end{align*}
+\end{proof}
+
+\begin{remark}
+    $\{a\} \cup \{b\} = \{a, b\}$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        \{a\} \cup \{b\} &= \{x: x\;\epsilon\;\{a\} \text{ or } x\;\epsilon\;\{b\}\}\\
+                         &= \{x: x = a \text{ or } x = b\}\\
+                         &=\{a, b\}
+    \end{align*}
+\end{proof}
+
+Define $\{a, b, c\} = \{a\} \cup \{b\} \cup \{c\}$.
+
+\begin{remark}
+    $\{a, b, c\} = \{x: x = a \text{ or } x = b \text{ or } x = c\}$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        \{a, b, c\} &= \{a\} \cup \{b\} \cup \{c\}\\
+                    &= \{x: x = a \text{ or } x = b\} \cup \{c\}\\
+                    &= \{x: x\;\epsilon\;\{x: x = a \text{ or } x = b\} \text{ or } x\;\epsilon\;\{c\}\}\\
+                    &= \{x: x = a \text{ or } x = b \text{ or } x = c\}.
+    \end{align*}
+\end{proof}
+This remark means that, for every three sets, there exists a unique set that contains the three sets and
+nothing else. This is the \textit{unordered triple} formed by them. Clearly, one can extend this arguement to \textit{quadruples}
+and so on.
 
 \end{document}
