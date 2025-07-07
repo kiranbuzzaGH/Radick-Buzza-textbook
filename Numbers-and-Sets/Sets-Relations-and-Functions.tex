@@ -146,6 +146,12 @@ granted that this is a valid set. Rewriting the generic set constructed by the A
     \{x\;\epsilon\;A: S(x)\} = \{x: x\;\epsilon\;A \text{ and } S(x)\}.
 \end{displaymath}
 
+As an aside, it is worth clarifying that the objects in a set are unique insofar as $\{a, a\} = \{a\}$. This is a subtle point, and it doesn't
+necessarily imply that, for example, $\{2, 2, 3\} = \{2, 3\}$. Just because two objects have the same value doesn't necessarily imply that
+they are the same object. Thus, the $2$ and the $2$ in the lefthand side of the example may be distinct objects, despite having the same value.
+In our discussion, we use letters to represent abstract objects and so if the same letter is used, they represent
+the same object and thus can't be in the same set twice.
+
 \section{Unions and Intersections}
 \begin{axiom}[Axiom of Unions]
     For every collection of sets there exists a set that contains all the elements that belong to at least
@@ -163,6 +169,10 @@ is the set of sets) $\mathcal{C}$, which is unique by the Axiom of Extension. De
 \begin{equation}
     \bigcup\;\{X: X\;\epsilon\;\mathcal{C}\}.
 \end{equation}
+
+
+% Consider relegating the below proofs to an appendix!
+
 
 We shall now prove various facts regarding unions.
 \begin{remark}
