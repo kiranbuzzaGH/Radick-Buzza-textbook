@@ -42,6 +42,10 @@ Equality is \textit{symmetric}, that is $A = B \Leftrightarrow B = A$, whereas s
 (that is, $A \subset B$ and $B \subset A \Rightarrow A = B$)\footnote{Antisymmetry is defined by "if $aRb$ and $bRa$, then $a = b$" for
 some binary relation R.}.
 
+As an aside, the Axiom of Extension implies that all elements of a set are distinct; that is to say, $\{1, 2, 2\} = \{1, 2\}$ (using notation
+introduced later). There is no element $x$ that belongs to the left hand side for which $x$ belonging to the left hand side isn't
+also true.
+
 \section{The Axiom of Specification}
 The basis of most Set Theoretic principles is to construct new sets from old sets. The most important such principle
 is the so called "\textit{Aussonderungsaxiom}":
@@ -145,12 +149,6 @@ granted that this is a valid set. Rewriting the generic set constructed by the A
 \begin{displaymath}
     \{x\;\epsilon\;A: S(x)\} = \{x: x\;\epsilon\;A \text{ and } S(x)\}.
 \end{displaymath}
-
-As an aside, it is worth clarifying that the objects in a set are unique insofar as $\{a, a\} = \{a\}$. This is a subtle point, and it doesn't
-necessarily imply that, for example, $\{2, 2, 3\} = \{2, 3\}$. Just because two objects have the same value doesn't necessarily imply that
-they are the same object. Thus, the $2$ and the $2$ in the lefthand side of the example may be distinct objects, despite having the same value.
-In our discussion, we use letters to represent abstract objects and so if the same letter is used, they represent
-the same object and thus can't be in the same set twice.
 
 \section{Unions and Intersections}
 \begin{axiom}[Axiom of Unions]
