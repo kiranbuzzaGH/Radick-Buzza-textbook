@@ -1,0 +1,32 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    The Role of Algorithms in Computing
+\end{center}
+
+\section{Algorithms}
+An \textit{algorithm} is a computational procedure that solves a well-specified \textit{computational problem} by taking some \textit{input} (or set
+of inputs) and producing some \textit{output} (or set of outputs) in finite time. An example of a well-specified problem is the \textit{sorting
+problem}:
+\newline\textbf{Input}: A sequence of n numbers $\left\langle a_1, a_2, ..., a_n\right\rangle$
+\newline\textbf{Output}: A permutation of the input sequence $\left\langle a_1', a_2', ..., a_n' \right\rangle$ where $a_1' \leq  a_2' \leq ... \leq a_n'$.
+
+An \textit{instance} of a problem consists of an input needed to compute a solution that satisfies the given constraints of the problem. For example,
+$\left\langle 41, 32, 55 \right\rangle$ is an instance of the sorting problem.
+
+An algorithm for a computational problem is \textit{correct} if, for all instances of the problem, it produces a correct solution in finite time (that is, it \textit{halts}). Thus,
+an incorrect algorithm would be one that only works for some instances and doesn't work for others, or one for which a solution can only be produced in
+infinite time for at least one instance. We can say that a correct algorithm \textit{solves} the computational problem.
+
+A \textit{data structure} is a way to store and organise data in order to facilitate access and modifications.
+
+Algorithms that receive their inputs over time, rather than it all being present at the start, are called \textit{online algorithms}.
+
+\end{document}
