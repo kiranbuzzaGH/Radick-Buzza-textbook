@@ -82,4 +82,24 @@ algorithm. The loop stops where $i > n$, or equivalently, $i = n + 1$. Subbing t
 \textit{The subarray A[1:n] consists of elements originally in A[1:n] but in sorted order}. This is exactly our goal (that is, array A
 has been sorted) and so this proves correctness by induction.
 
+\textit{Linear search} solves the following \textit{searching problem}:
+\newline \textbf{Input:} A sequence of $n$ numbers $\left\langle a_1, a_2, ..., a_n\right\rangle$ stored in array
+A[1:n] and a value $x$.
+\newline \textbf{Output:} An index $i$ such that $x$ equals A[i] or the special value \texttt{NIL} if x does not appear
+in A.
+
+Linear search scans the array from beginning to end, looking for $x$:
+\begin{lstlisting}
+    LINEAR-SEARCH(A, n, x)
+    for i in 1 to n
+        if A[i] = x
+            return i
+    return NIL
+\end{lstlisting}
+
+Prove its correctness with the following loop invariant: \textit{At the start of each iteration, the
+subarray \texttt{A[1:i-1]} contains only elements not equal to x}. This is valid as the loop terminates when
+returning either $i$ or \texttt{NIL}.
+
+
 \end{document}
