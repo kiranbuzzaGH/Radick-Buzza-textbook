@@ -11,19 +11,6 @@
     Datatypes and Trees
 \end{center}
 
-\section{Pattern-matching}
-Pattern matching allows you to select conditions neatly, without the need for many if statements. The
-syntax is most clearly seen through an example:
-\begin{lstlisting}
-factorial : int -> int
 
-let rec factorial a =
-  match a with
-    1 -> 1
-  | _ -> a * factorial (a - 1)
-\end{lstlisting}
-The pattern $\_$ is used as a "wild card" as it can match anything. OCaml will warn you if your list of pattens is not
-exhaustive. Note that all of the expressions that the patterns are matched to must have the same type and
-thus, this is the type of the whole expression.
 
 \end{document}
