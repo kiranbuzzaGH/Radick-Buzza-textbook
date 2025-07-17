@@ -7,7 +7,7 @@ def linear_search(A, n, x):
     """
     Search for an element in a list
 
-    Arguements
+    Arguments
     A -- a list or numpy array
     n -- length of A
     x -- a value of the same type as the array

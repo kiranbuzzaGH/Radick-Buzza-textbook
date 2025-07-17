@@ -3,7 +3,7 @@
 def insertion_sort(A, n):
     """ Sort a list.
 
-    Arguements:
+    Arguments:
     A -- a list
     n -- length of A
     """
