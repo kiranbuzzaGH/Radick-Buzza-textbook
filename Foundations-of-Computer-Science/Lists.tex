@@ -26,9 +26,12 @@ The pattern $\_$ is used as a "wild card" as it can match anything. OCaml will w
 exhaustive. Note that all of the expressions that the patterns are matched to must have the same type and
 thus, this is the type of the whole expression.
 
+You can also pattern match multiple things at once with the syntax:
+\newline \texttt{match a, b with 0, 0 -> \textit{expression1} | x, y -> \textit{expression2} | ...}
+
 \section{Making Lists}
 A \textit{list} is an ordered collection of zero or more elements of the same type. They are denoted by enclosing the elements in
-square brackets, separated by semicolons, for example: \texttt{[1; 2; 3; 4; 5]}. If the list isn't empty(that is, it
+square brackets, separated by semicolons, for example: \texttt{[1; 2; 3; 4; 5]}. If the list isn't empty (that is, it
 doesn't contain no elements), it can be decomposed into a head (the first element) and a tail (a list containing the rest of the elements).
 If the list only has one element, the tail is the empty list.
 The \textit{cons} operator "\texttt{::}" adds an element to the front of a list; it can be used to separate a list \texttt{l}
@@ -36,18 +39,19 @@ into its head and tail \texttt{h::t}. This is especially useful when pattern mat
 a list into its contents, for example:
 \begin{lstlisting}
   sum : int list -> int
+
   let rec sum l =
     match l with
       [] -> 0
     | h::t -> h + sum t
 \end{lstlisting}
 
-We can separate a list into even more elements as a::(b::t) is the same as a::b::t. We can access any element of the
+We can separate a list into even more elements as \texttt{a::(b::t)} is the same as \texttt{a::b::t}. We can access any element of the
 list in this way (although practically we wouldn't want to decompose it much more in this way). Thus, cons can distinguish lists of
-specific lengths or with particular contents (for example, a list that can be written as a::b::t must contain at least two
+  specific lengths or with particular contents (for example, a list that can be written as \texttt{a::b::t} must contain at least two
 elements).
 
-The similar \textit{append} operator \texttt{@} can combine two lists together. This is proportional to the length of the left list,
+The similar \textit{append} operator \texttt{@} can combine two lists together. This is time proportional to the length of the left list,
 while cons is constant time.
 
 If a function works regardless of the type of its arguments, it is called \textit{polymorphic}. For example, the following length
@@ -84,9 +88,9 @@ contains.
 
 We shall now discuss a very powerful form of recursion called \textit{tail recursion}. Often, recursion results in
 large expressions being built up (that is, many function calls on the stack), which can be inefficient as it is related to the
-length of the argument. Tail recursion
+size of the argument. Tail recursion
 bypasses this by using an accumulator. By passing an extra argument, we can store extra information at each function
-call. This allows us to perform calculations that are unrelated to the length of the argument. Here is an example of
+call. This allows us to perform calculations that are independent of the size of the argument. Here is an example of
 such a recursive function which reverses a list (note that the obvious way using \texttt{@} would be inefficient - quadratic in time).
 When using \texttt{h::t} as an argument in a function, remember to enclose it in brackets.
 \begin{lstlisting}
