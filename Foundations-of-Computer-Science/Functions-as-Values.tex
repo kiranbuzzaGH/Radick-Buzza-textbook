@@ -1,0 +1,40 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    Functions as Values
+\end{center}
+
+When making larger programs, it is necessary to reuse other programs. There are many ways of doing this.
+
+It is possible to pass a function to another function as an argument. For example, the function \texttt{map}
+below applies function f to every element in list l.
+\begin{lstlisting}
+    map : ('a -> 'b) -> 'a list -> 'b list
+
+    let rec map f l =
+      match l with
+        [] -> []
+      | h::t -> f h :: map f t
+\end{lstlisting}
+
+It is also possible to use a function within another function without assigning a name in the namespace to the argument function.
+We call this type of function an \textit{anonymous function}. The syntax is
+\texttt{fun name -> \textit{expression}}. This can be used when a function is only applied in one place and is
+short. For example, below we define a function that returns true for an element if it's even.
+\begin{lstlisting}
+    evens : int list -> bool list
+
+    let evens l =
+      map (fun x -> x mod 2 = 0) l
+\end{lstlisting}
+
+OCaml allows you to convert an operator into a function with the syntax \texttt{( \textit{operator} )}. For example,
+\texttt{( <= ) 3 4} has the value \texttt{true} and \texttt{( + ) 3 4} has the value \texttt{7}.
+\end{document}
