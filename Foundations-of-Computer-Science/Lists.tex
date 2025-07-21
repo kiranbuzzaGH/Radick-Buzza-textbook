@@ -74,17 +74,27 @@ We shall now define some useful functions for manipulating lists:
   drop : int -> 'a list -> 'a list
 
   let rec take n l =
-    if n = 0 then [] else
-      match l with
-        h::t -> h :: take (n - 1) t
+    match l with
+      [] ->
+        if n = 0
+          then []
+          else raise (Invalid_argument "take")
+    | h::t ->
+        if n < 0 then raise (Invalid_argument "take") else
+          if n = 0 then [] else h :: take (n - 1) t
 
   let rec drop n l =
-    if n = 0 then l else
-      match l with
-        h::t -> drop (n - 1) t
+    match l with
+      [] ->
+        then []
+        else raise (Invalid_argument "drop")
+    | h::t ->
+        if n < 0 then raise (Invalid_argument "drop") else
+          if n = 0 then l else drop (n - 1) t
 \end{lstlisting}
-Note that these pattern matches are not exhaustive and so will fail if you try to take or drop more elements than the list
-contains.
+Note that if pattern matches are not exhaustive, the interpreter will throw a warning
+and there is the possiblility that you experience a run-time error. This has been handled
+above using exceptions (discussed in the Datatypes and Trees chapter).
 
 We shall now discuss a very powerful form of recursion called \textit{tail recursion}. Often, recursion results in
 large expressions being built up (that is, many function calls on the stack), which can be inefficient as it is related to the

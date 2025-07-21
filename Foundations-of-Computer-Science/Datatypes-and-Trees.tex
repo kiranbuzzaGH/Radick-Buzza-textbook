@@ -11,6 +11,21 @@
     Datatypes and Trees
 \end{center}
 
+\section{Exceptions}
+In OCaml, \textit{run-time errors} are reported with \textit{exceptions}. An exception can be defined
+for later use, with the syntax: \textbf{exception} \textit{name}. The exception can also accept arguments
+of some specified type, using the syntax: \textbf{exception} \textit{name} \textbf{of} \textit{type}.
+Such an exception is called with (\textit{name argument}). Raise an exception with the keyword \textbf{raise}. See
+examples in the functions "take" and "drop", defined in the lists chapter.
 
+It is also possible to \textit{handle} an exception with an \textit{exception handler}. Note that the types must be
+consistent with the type of the function.
+\begin{lstlisting}
+    safe_divide : int -> int -> int
+
+    let safe_divide x y =
+      try x / y with
+        Division_by_zero -> 0
+\end{lstlisting}
 
 \end{document}
