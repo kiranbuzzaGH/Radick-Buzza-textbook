@@ -15,7 +15,8 @@
 In OCaml, \textit{run-time errors} are reported with \textit{exceptions}. An exception can be defined
 for later use, with the syntax: \textbf{exception} \textit{name}. The exception can also accept arguments
 of some specified type, using the syntax: \textbf{exception} \textit{name} \textbf{of} \textit{type}.
-Such an exception is called with (\textit{name argument}). Raise an exception with the keyword \textbf{raise}. See
+Such an exception is called with (\textit{name argument}); for example, the exception \texttt{(Invalid\_argument "\textit{string}")}
+must take a single string as its argument. Raise an exception with the keyword \textbf{raise}. See
 examples in the functions "take" and "drop", defined in the lists chapter.
 
 It is also possible to \textit{handle} an exception with an \textit{exception handler}. Note that the types must be

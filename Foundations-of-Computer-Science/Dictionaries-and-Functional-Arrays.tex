@@ -1,0 +1,46 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    Dictionaries and Functional Arrays
+\end{center}
+
+\section{Dictionaries}
+A \textit{dictionary} associates some unique \textit{keys} with corresponding \textit{values}. In OCaml,
+these keys and their values are stored in a list of \textit{pairs}. A pair is a special case of a \textit{tuple}, which
+may contain two or more objects (not necessarily of the same type). For example, the tuple \texttt{(1, false, 'a')} has
+type \texttt{int $\times$ bool $\times$ char}. We now present some useful functions when working with dictionaries.
+\begin{lstlisting}
+    add : 'a -> 'b -> ('a * 'b) list
+    mklists : ('a * 'b) list -> 'a list * 'b list
+
+    let rec add k v d =
+      match d with
+        [] -> [(k, v)]
+      | (k', v')::t ->
+          if k = k'
+            then (k, v) :: t
+            else (k', v') :: add k v t
+
+    let rec mklists l =
+      match l with
+        [] -> ([], [])
+      | (k, v)::t ->
+          let (kt, vt) = mklists t in
+            (k :: ks, k :: vs)
+\end{lstlisting}
+Note that the add function replaces a duplicate key with the newer key value pair. The mklists (make lists)
+function decomposes a dictionary into a tuple of lists, one containing the keys, the other containing the values.
+These can be extracted by pattern matching in the usual way. Alternatively, the following syntax may be used:
+\begin{lstlisting}
+    let first (x, _) = x
+    let second (_, y) = y
+\end{lstlisting}
+
+\end{document}

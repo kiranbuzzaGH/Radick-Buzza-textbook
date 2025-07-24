@@ -72,6 +72,7 @@ We shall now define some useful functions for manipulating lists:
 \begin{lstlisting}
   take : int -> 'a list -> 'a list
   drop : int -> 'a list -> 'a list
+  member : 'a -> 'a list -> bool
 
   let rec take n l =
     match l with
@@ -91,6 +92,11 @@ We shall now define some useful functions for manipulating lists:
     | h::t ->
         if n < 0 then raise (Invalid_argument "drop") else
           if n = 0 then l else drop (n - 1) t
+
+  let rec member n l =
+    match l with
+      [] -> false
+    | h::t -> n = h || member n t
 \end{lstlisting}
 Note that if pattern matches are not exhaustive, the interpreter will throw a warning
 and there is the possiblility that you experience a run-time error. This has been handled
