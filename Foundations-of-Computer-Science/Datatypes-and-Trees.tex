@@ -87,4 +87,91 @@ It is possible to declare your own datatypes with the syntax \texttt{type \texti
  Note that we have used our \texttt{option} type for error handling. Thus, 1 + 2 * 3 would be represented as
  \texttt{Add (Num 1, Multiply (Num 2, Num 3))} in the expr type.
 
+ \section{Trees}
+ A \textit{binary tree} is used to represent structures that branch. Let us define the \textit{data structure} as
+ follows:
+ \begin{lstlisting}
+   type 'a tree =
+     Br of 'a * 'a tree * 'a tree
+   | Lf
+ \end{lstlisting}
+This is a polymorphic data structure where the branches hold a value and the left and right subtrees. A leaf occurs when there is no left and
+no right subtree. Thus, a valid tree would be \texttt{Br (2, Br (1, Lf, Lf), Lf)}.
+
+We shall now define various functions for trees.
+\begin{lstlisting}
+  size : 'a tree -> int
+  total : int tree -> int
+
+  let rec size tr =
+    match tr with
+      Br (_, l, r) -> 1 + size l + size r
+    | Lf -> 0
+
+  let rec total tr =
+    match tr with
+      Br (x, l, r) -> x + total l + total raise
+    | Lr -> 0
+\end{lstlisting}
+
+The depth of a tree is the longest path from the root of the tree to a leaf.
+\begin{lstlisting}
+  max : int -> int -> int
+  maxdepth : 'a tree -> int
+  list_of_tree : 'a tree -> 'a list
+  tree_map : ('a -> 'b) -> 'a tree -> 'b tree
+
+  let max x y =
+    if x > y then x else y
+
+  let rec max_depth tr =
+    match tr with
+      Br (_, l, r) -> 1 + max (maxdepth l) (maxdepth r)
+    | Lf -> 0
+
+  let rec list_of_tree tr =
+    match tr with
+      Br (x, l, r) -> list_of_tree l @ [x] @ list_of_tree r
+    | Lf -> []
+
+  let rec tree_map f tr =
+    match tr with
+      Br (x, l, r) -> Br (f x, tree_map f l, tree_map f r)
+    | Lf -> Lf
+\end{lstlisting}
+
+We shall now discuss a more specific kind of tree called a \textit{binary search tree}. This is a tree such that all
+branches with values smaller than any given branch are to the left of said branch and all branches with values larger than
+a given branch are to the right of said branch. It can be used to implement a dictionary with more efficient lookup times (O(log n) instead
+of O(n)).
+\begin{lstlisting}
+  lookup : ('a * 'b) tree -> 'a -> 'b option
+  insert : ('a * 'b) tree -> 'a -> 'b -> ('a * 'b) tree
+  tree_of_list : 'a list -> 'a tree
+
+  let rec lookup tr k =
+    match tr with
+      Lf -> None
+    | Br ((k', v'), l, r) ->
+        if k = k' then Some v
+        else if k < k' then lookup l k
+        else lookup r k
+
+  let rec insert tr k v =
+    match tr with
+      Lf -> Br ((k, v), Lf, Lf)
+    | Br ((k', v'), l, r) ->
+        if k = k' then Br ((k, v), l, r)
+        else if k < k' then Br ((k', v'), insert l k v, r)
+        else Br ((k', v'), l, insert r k v)
+
+  let rec tree_of_list l =
+    match l with
+      [] -> Lf
+    | (k, v)::t -> insert (tree_of_list t) k v
+\end{lstlisting}
+Note that \texttt{tree\_of\_list} can be implemented more efficiently using tail recursion.
+
+\textit{Strings} are sequences of characters enclosed by double quotes, with the built-in type \textbf{string}.
+
 \end{document}
