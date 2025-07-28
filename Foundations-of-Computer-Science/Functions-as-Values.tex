@@ -43,13 +43,13 @@ In reality, functions that take multiple arguments are really multiple single ar
 each other. That is, a function \text{f a b} has type $\alpha \rightarrow \beta \rightarrow \gamma$, which we can write as
 $\alpha \rightarrow (\beta \rightarrow \gamma)$. Thus it takes an argument of type $\alpha$ and returns a function of type
 $\beta \rightarrow \gamma$, which in turn takes an argument of $\beta$ and returns a value of type $\gamma$. This can be written
-explicitly as \texttt{let f = fun a -> fun b -> ...} instead of just \texttt{let f = ...}.
+explicitly as \texttt{let f = fun a -> fun b -> ...} instead of just \texttt{let f = ...}
 
 As a result, it is possible to apply fewer than the total number of arguments to a function. This is called \textit{partial
 application}. We now introduce various examples to demonstrate this.
 
 The simplest example is \texttt{let add x y = x + y}. If we write \texttt{let f = add 6}, f is now a function that
-adds 6. Notice that add has type int -> int -> int and f (and by extension add 6) has type int -> int.
+adds 6. Notice that \texttt{add} has type int $\rightarrow$ int $\rightarrow$ int and f (and by extension \texttt{add 6}) has type int $\rightarrow$ int.
 
 Recall that it is possible to produce a function from an operator with the syntax \texttt{( / )}. This fact can be
 used in conjunction with partial application to create, for example, a function which returns 2 divided by its input:
@@ -65,7 +65,7 @@ Consider a function that maps a function over a list of lists:
     | h::t -> map f h :: mapl f t
 \end{lstlisting}
 This can be rewritten using partial application: \texttt{let mapl f l = map (map f) l} or even \texttt{let
-mapl f = map (map f)}. In this case, \texttt{map (map f)} has type $\alpha$ list list -> $\beta$ list list.
+mapl f = map (map f)}. In this case, \texttt{map (map f)} has type $\alpha$ list list $\rightarrow \beta$ list list.
 
 Recall the member function, which checks if some value is in a given list:
 \begin{lstlisting}
@@ -77,8 +77,8 @@ Recall the member function, which checks if some value is in a given list:
     | h::t -> n = h || member n t
 \end{lstlisting}
 We want to write a similar function that checks if some element is in every list in a list of lists.
-We can solve this using partial application of member. \texttt{member x} will have type $\alpha$ list -> bool
-so \texttt{map (member x)} has type $\alpha$ list list -> bool list. Thus,
+We can solve this using partial application of member. \texttt{member x} will have type $\alpha$ list $\rightarrow$ bool
+so \texttt{map (member x)} has type $\alpha$ list list $\rightarrow$ bool list. Thus,
 \begin{lstlisting}
   member_all : 'a -> 'a list list -> bool
 
@@ -99,5 +99,8 @@ If we wanted to make a function which shortens all lists in a list of lists by a
   let truncate n l =
     map (new_len n) l
 \end{lstlisting}
+Note that when handling the exception above, we have used the wildcard $\_$ rather than specifying a string so that
+our code is more robust and maintainable. If your code depends on the string argument of an exception for error handling,
+you should refactor your code to have more specific exceptions.
 
 \end{document}

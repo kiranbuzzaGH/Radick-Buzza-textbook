@@ -29,4 +29,62 @@ consistent with the type of the function.
         Division_by_zero -> 0
 \end{lstlisting}
 
+\section{Datatypes}
+It is possible to declare your own datatypes with the syntax \texttt{type \textit{name} = \textit{constructor1}
+ of \textit{type1} | \textit{constructor2} of \textit{type2} | ...}, where \textit{constructors} are the possible
+ forms that the type can take. The constructors must start with a capital letter. It is possible to pattern match on these, as with built-in types:
+ \begin{lstlisting}
+   type colour =
+     Red
+   | Green
+   | Blue
+   | RGB of int * int * int
+
+   components : colour -> int * int * int
+
+   let components c =
+     match c with
+       Red -> (255, 0, 0)
+     | Green -> (0, 255, 0)
+     | Blue -> (0, 0, 255)
+     | RGB (r, g, b) -> (r, g, b)
+ \end{lstlisting}
+ This is analagous to pattern matching some expression to different integers.
+
+ A type can be polymorphic; that is, a part of a type (called a \textit{type variable}) can vary. For example,
+ \texttt{type 'a option = None | Some of 'a}. In words, a value of type \texttt{$\alpha$ option} is either nothing or something
+ of type $\alpha$. This can be especially useful in exception handling, as we shall see below.
+
+ A type can also be defined recursively. For example, \texttt{type 'a sequence = Nil | Cons of 'a * 'a sequence}.
+ Note that this has a direct mapping onto the built-in list type, where \texttt{[]} is \texttt{Nil}, \texttt{[1]} is \texttt{Cons (1, Nil)} and \texttt{['a', 'b']} is \texttt{Cons ('a', Cons ('b', Nil))}
+ etc. All the functions we defined using lists can easily be converted to ones using our newly defined sequence.
+
+ Another example of a recursive type is set up below:
+ \begin{lstlisting}
+   type expr =
+     Num of int
+   | Add of expr * expr
+   | Subtract of expr * expr
+   | Multiply of expr * expr
+   | Divide of expr * expr
+   | Power of expr * expr
+
+   evaluate : expr -> int
+   evaluate_opt : expr -> int option
+
+   let rec evaluate e =
+   match e with
+     Num x -> x
+   | Add (e, e') -> evaluate e + evaluate e'
+   | Subtract (e, e') -> evaluate e - evaluate e'
+   | Multiply (e, e') -> evaluate e * evaluate e'
+   | Divide (e, e') -> evaluate e / evaluate e'
+   | Power (e, e') -> power (evaluate e) (evaluate e')
+
+   let evaluate_opt e =
+     try Some (evaluate e) with Division_by_zero -> None
+ \end{lstlisting}
+ Note that we have used our \texttt{option} type for error handling. Thus, 1 + 2 * 3 would be represented as
+ \texttt{Add (Num 1, Multiply (Num 2, Num 3))} in the expr type.
+
 \end{document}
