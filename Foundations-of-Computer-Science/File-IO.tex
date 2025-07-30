@@ -1,0 +1,134 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath}
+\usepackage[left=2cm,top=1cm,right=3cm,bottom=1cm]{geometry}
+\usepackage{graphicx}
+\usepackage{listings}
+
+
+\begin{document}
+
+\begin{center}\LARGE\bf
+    File I/O
+\end{center}
+
+In OCaml, there are a number of ways in which you can directly interact with files or the computer in real time.
+We shall discuss some of the language's built-in functionality.
+
+\section{Writing to the screen}
+OCaml has a value \texttt{()} which represents \textit{nothing} and has type \textbf{unit}.
+There are a number of functions that allow a user to print data to their screen. For example, \texttt{print\_int,
+print\_string, print\_newline} print integers, strings or newlines (moves to the beginning of the next line) respectively. They have
+respective types \textbf{int $\rightarrow$ unit, string $\rightarrow$ unit} and \textbf{unit $\rightarrow$ unit}. This printing is a side-effect and \texttt{()} (that is, nothing) is
+returned by these functions.
+
+It is possible to produce multiple side-effects sequentially by using the following syntax: \texttt{\textit{x} ; \textit{y}}. This evaluates the
+expression \textit{x} and ignores its result (best practices dictate that this should be \textbf{unit} anyway), then evaluates \textit{y}. For
+example:
+\begin{lstlisting}
+    print_dict_entry : int * string -> unit
+
+    let print_dict_entry (k, v) =
+      print_int k;
+      print_newline ();
+      print_string v;
+      print_newline ()
+\end{lstlisting}
+
+We can "extract" a side-effect from each element of a list in an analagous way to the map function:
+\begin{lstlisting}
+    iter : ('a -> 'b) -> 'a list -> unit
+
+    let rec iter f l =
+      match l with
+        [] -> ()
+      | h::t -> f h; iter f t
+\end{lstlisting}
+
+\section{Reading from the keyboard}
+Along with outputting to the computer, it is also possible to take input from the computer. The functions
+\texttt{read\_line} and \texttt{read\_int} take a string or int from the user respectively (where pressing the enter
+key indicates that the input is completed). These have types \textbf{unit $\rightarrow$ string} and \textbf{unit $\rightarrow$ int} respectively.
+If the user input a non-integer to \texttt{read\_int}, (\texttt{Failure "int\_of\_string"}) is raised. \texttt{int\_of\_string}
+makes an integer from a string and \texttt{string\_of\_int} makes a string representation of an integer. Below is an example of these
+functions in use.
+\begin{lstlisting}
+    read_dict_number : int -> (int * string) list
+    read_dict : unit -> (int * string) list
+
+    exception BadNumber
+
+    let rec read_dict_number n =
+      if n = 0 then [] else
+        try
+          let i = read_int () in
+            let name = read_line () in
+              (i, name) :: read_dict_number (n - 1)
+        with
+          Failure _ ->
+            print_string "This is not a valid integer.";
+            print_newline ();
+            print_string "Please enter integer and name again.";
+            print_newline ();
+            read_dict_number n
+
+    let rec read_dict () =
+      print_string "How many dictionary entries to input?";
+      print_newline ();
+      try
+        let n = read_int () in
+          if n < 0 then BadNumber else read_dict_number n
+      with
+        Failure _ ->
+          print_string "Not a number. Try again";
+          print_newline ();
+          read_dict ()
+      | BadNumber ->
+          print_string "Number is negative. Try again";
+          print_newline ();
+          read_dict ()
+\end{lstlisting}
+
+\section{Using files}
+There are also various built-in functions for working with files in OCaml. A place we can read from has type
+\textbf{in\_channel} and a place we can write to has type \textbf{out\_channel}. We can create an input or output channel for
+some file using the functions \texttt{open\_in} and \texttt{open\_out} respectively, where this opens a channel associated with
+the given filename. They thus have types \textbf{string $\rightarrow$ in\_channel} and \textbf{string $\rightarrow$ out\_channel} respectively. If a file can't be opened,
+a \texttt{Sys\_error} is raised. It is
+important that these channels are closed once they have been finished with. This can be done with the functions \texttt{close\_in}
+and \texttt{close\_out}, each with types \textbf{in\_channel $\rightarrow$ unit} and \textbf{out\_channel $\rightarrow$ unit} respectively.
+
+Once we have opened these channels, it is possible to read and write to them, respectively. Reading is done using \texttt{input\_line},
+which has type \textbf{in\_channel $\rightarrow$ string}. Writing is done using \texttt{output\_string} and \texttt{output\_char},
+which have types \textbf{out\_channel $\rightarrow$ string $\rightarrow$ unit} and \textbf{out\_channel $\rightarrow$ char $\rightarrow$ unit} respectively. Note that if
+we want to read or write integers, we must convert them to and from strings using \texttt{int\_of\_string} and \texttt{string\_of\_int}.
+
+We now write a program to copy a file \texttt{a.txt} to a file \texttt{b.txt}.
+\begin{lstlisting}
+    copy_file_ch : in_channel -> out_channel -> unit
+    copy_file : string -> string -> unit
+
+    exception CopyFailed
+
+    let rec copy_file_ch from_ch to_ch =
+      try
+        output_string to_ch (input_string from_ch);
+        output_string "\n";
+        copy_file_ch from_ch to_ch
+      with
+        End_of_file -> ()
+
+    let copy_file file1 file2 =
+      try
+        let from_ch = open_in file1 in
+          let to_ch = open_out file2 in
+            copy_file_ch from_ch to_ch;
+            close_in from_ch;
+            close_out to_ch
+      with
+        _ -> raise CopyFailed
+\end{lstlisting}
+We call this function as \texttt{copy\_file "a.txt" "b.txt"}. Note the use of the character '$\backslash$n' to represent
+a newline. See also the use of the exception \texttt{End\_of\_file}, which is raised when there is nothing more to
+read from a file.
+
+\end{document}
