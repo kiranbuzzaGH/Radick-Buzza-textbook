@@ -113,12 +113,12 @@ management (load, store, copy) and control (conditional \& unconditional branch,
 The notion of input size depends on the problem being studied. For example, in sorting, the number of items in the input
 is the clear choice; when multiplying two integers, the total number of bits needed to represent the input in binary
 may be used; for graph algorithms, both the number of vertices and edges are useful input sizes. The running time of an
-algorithm on a particular input is the number of instructions and data accesses executed. Assume each line of pseudocode takes
+algorithm depends on a particular input, and is the number of instructions and data accesses executed. Assume each line of pseudocode takes
 constant time. Note that, while calling a subroutine takes a constant amount of time, actually executing this subroutine may (and
 likely will) take more.
 
-We shall analyse Insertion Sort to demonstrate this analysis process. See figure \ref{Figure: insertion sort with costs} for the pseudocode
-of the algorithm with the cost of each step. Denote the number of times the while loop executes the \texttt{for i = 2, ..., n} with $t_i$.
+We shall analyse insertion sort to demonstrate this analysis process. See Figure \ref{Figure: insertion sort with costs} for the pseudocode
+of the algorithm with the cost of each step. Denote the number of times the while loop executes the \texttt{for i = 2 to n} with $t_i$.
 Thus, we must sum over the i to get the number of times these lines will execute. Note that the \textbf{for}
 and \textbf{while} loop execute one extra time than their bodies to account for the terminating check (that is, they execute $(n - 1) + 1$ times).
 \begin{figure}[ht]\centering\label{Figure: insertion sort with costs}
@@ -175,5 +175,7 @@ explicit in the pseudocode below:
         exchange A[i] with A[smallest]
 \end{lstlisting}
 This has average-case and worst-case running time $\Theta(n^2)$.
+
+\section{Merge Sort}
 
 \end{document}
