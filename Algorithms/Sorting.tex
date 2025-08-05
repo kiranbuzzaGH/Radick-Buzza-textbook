@@ -102,11 +102,11 @@ subarray \texttt{A[1:i-1]} contains only elements not equal to x}. This is valid
 returning either $i$ or \texttt{NIL}.
 
 \section{Analysis of Algorithms}
-Analysing an algorithm has come to mean predicting the resources that it requires. In the \textit{random-access
+Analysing an algorithm has come to mean predicting the resources that it requires, most commonly time (and memory). In the \textit{random-access
 machine} (RAM) model of computation, each instruction or data access takes a constant amount of time, and
 no operations occur concurrently. Note that we can't assume that every instruction takes constant time as this
-would lead to an unrealistic and unhelpful model. For example, an instruction that sorts is a single instruction and
-so, in the RAM model, would be assumed to take constant time, which is unrealistic. Thus, the only computations that we consider
+would lead to an unrealistic and unhelpful model. For example, an instruction that sorts in a single instruction,
+would be assumed to take constant time in the RAM model, which is unrealistic. Thus, the only computations that we consider
 to take constant time are those that can occur in real computers, especially arithmetic (standard operations, mod, floor, ceiling), data
 management (load, store, copy) and control (conditional \& unconditional branch, subroutine call, return).
 
