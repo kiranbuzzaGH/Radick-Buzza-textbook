@@ -21,7 +21,7 @@ problem}:
 An \textit{instance} of a problem consists of an input needed to compute a solution that satisfies the given constraints of the problem. For example,
 $\left\langle 41, 32, 55 \right\rangle$ is an instance of the sorting problem.
 
-An algorithm for a computational problem is \textit{correct} if, for all instances of the problem, it produces a correct solution in finite time (that is, it \textit{halts}). Thus,
+An algorithm for a computational problem is \textit{correct} if it produces a correct solution in finite time (that is, it \textit{halts}) for all instances of the problem. Thus,
 an incorrect algorithm would be one that only works for some instances and doesn't work for others, or one for which a solution can only be produced in
 infinite time for at least one instance. We can say that a correct algorithm \textit{solves} the computational problem.
 
@@ -30,8 +30,8 @@ A \textit{data structure} is a way to store and organise data in order to facili
 Algorithms that receive their inputs over time, rather than it all being present at the start, are called \textit{online algorithms}.
 
 Differences in algorithmic efficiency can have as big an impact on total system performance as fast hardware, for example.
-In light of this, it is worth thinking of algorithms as a \textit{technology}. To illustrate this, consider the two
-most elementary sorting algorithms: \textit{insertion sort} and \textit{merge sort}. These have efficiencies $c_1n^2$ and $c_2n\log n$, respectively.
+In light of this, it is worth thinking of algorithms as a \textit{technology}. To illustrate this, consider two
+sorting algorithms: \textit{insertion sort} and \textit{merge sort}. These have efficiencies $c_1n^2$ and $c_2n\log n$, respectively.
 Even if $c_1 \ll c_2$, eventually the form of the dependence on $n$ will have a greater impact.
 
 \end{document}

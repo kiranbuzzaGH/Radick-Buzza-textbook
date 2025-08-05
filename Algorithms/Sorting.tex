@@ -58,7 +58,7 @@ will eventually result in a sorted array. See Figure \ref{Figure: insertion sort
 
 We want to prove that this is a correct algorithm. We can do this by mathematical induction using a \textit{loop invariant}.
 A loop invariant is a property of a program that is true before and after each iteration of a loop. Thus, if we can formulate
-the desired outcome of our algorithm (in this case, for the array to be sorted) as a loop invariant, showing that this property
+the desired outcome of our algorithm (in this case, for the array to be sorted) as a loop invariant, then showing that this property
 is a valid loop invariant will be equivalent to proving correctness of the algorithm. To show that the loop invariant is corrent we must
 show:
 \newline \textbf{Initialization}: the property is true before the first iteration of the loop.
@@ -101,5 +101,79 @@ Prove its correctness with the following loop invariant: \textit{At the start of
 subarray \texttt{A[1:i-1]} contains only elements not equal to x}. This is valid as the loop terminates when
 returning either $i$ or \texttt{NIL}.
 
+\section{Analysis of Algorithms}
+Analysing an algorithm has come to mean predicting the resources that it requires. In the \textit{random-access
+machine} (RAM) model of computation, each instruction or data access takes a constant amount of time, and
+no operations occur concurrently. Note that we can't assume that every instruction takes constant time as this
+would lead to an unrealistic and unhelpful model. For example, an instruction that sorts is a single instruction and
+so, in the RAM model, would be assumed to take constant time, which is unrealistic. Thus, the only computations that we consider
+to take constant time are those that can occur in real computers, especially arithmetic (standard operations, mod, floor, ceiling), data
+management (load, store, copy) and control (conditional \& unconditional branch, subroutine call, return).
+
+The notion of input size depends on the problem being studied. For example, in sorting, the number of items in the input
+is the clear choice; when multiplying two integers, the total number of bits needed to represent the input in binary
+may be used; for graph algorithms, both the number of vertices and edges are useful input sizes. The running time of an
+algorithm on a particular input is the number of instructions and data accesses executed. Assume each line of pseudocode takes
+constant time. Note that, while calling a subroutine takes a constant amount of time, actually executing this subroutine may (and
+likely will) take more.
+
+We shall analyse Insertion Sort to demonstrate this analysis process. See figure \ref{Figure: insertion sort with costs} for the pseudocode
+of the algorithm with the cost of each step. Denote the number of times the while loop executes the \texttt{for i = 2, ..., n} with $t_i$.
+Thus, we must sum over the i to get the number of times these lines will execute. Note that the \textbf{for}
+and \textbf{while} loop execute one extra time than their bodies to account for the terminating check (that is, they execute $(n - 1) + 1$ times).
+\begin{figure}[ht]\centering\label{Figure: insertion sort with costs}
+    \includegraphics[angle=0]{Figures/insertion-sort-with-costs.pdf}
+    \caption{Pseudocode of insertion sort with the cost of each step.}
+\end{figure}
+The running time is the cost multiplied by the number of times this step occurs. Thus the running time
+for insertion sort is $T(n) = c_1 + c_2(n - 1) + c_4(n - 1) + c_5\sum_{i = 2}^{n}t_i + c_6\sum_{i = 2}^{n}(t_i - 1)
++ c_7\sum_{i = 2}^{n}(t_i - 1) + c_8(n - 1)$. Note that, while defining $t_i$ in this way simplifies the function, we could have defined it in a different
+way if that were more useful.
+
+In the best case scenario, the array was already sorted, so each \textbf{while} loop is only executed
+once. That is, $t_i = 1$ (for all i) so $T(n) = (c_1 + c_2 + c_4 + c_5 + c_8)n - (c_2 + c_4 + c_5 + c_8) = an + b$, for
+some constants $a$ and $b$. This is a \textit{linear} function of n.
+
+In the worst case scenario, the array is in reverse sorted order initially. In this case, $t_i = i$ as \texttt{A[j] > key} is
+true every time. We can prove the following relations by induction.
+\begin{eqnarray*}
+    \sum_{i = 2}^{n}i = \left(\sum_{i = 1}^{n}i\right) - 1 = \frac{n(n + 1)}{2} - 1\\
+    \sum_{i = 2}^{n}(i - 1) = \left(\sum_{i = 1}^{n - 1}i\right) = \frac{n(n - 1)}{2}
+\end{eqnarray*}
+
+If we write out T(n) again, we get a function of the form $T(n) = an^2 + bn + c$, where $a$, $b$ and $c$ depend
+on the constants $c_k$. This is a \textit{quadratic} function of n.
+
+Generally, we concentrate on the worst-case running time as this gives us an upper bound for the running
+time of our algorithm. Average-case running time can also be useful (for example, in the above case $t_i = \frac{i}{2})$,
+although it's often the same as the worst-case. We are interested in rate of growth (or order of growth) of the running
+time, that is, only the leading term. We write the order of growth with theta notation. For example, insertion
+sort has $\Theta(n^2)$.
+
+It is not common to consider the best-case running time, although there are reasons to do so. For example, the
+best case of insertion sort is linear time (which is the fastest conceivable comparison sort time as every element needs to
+be "looked at" at least once). We can use this initially to check if the array is already sorted, before applying
+some other sorting algorithm if it isn't. This is no more computationally expensive than just running the
+second algorithm immediately, which will have a running time that is greater than linear for the worst case.
+Thus, we can get the benefit of quickly sorting the special case for practically no cost.
+
+\subsection{Selection Sort}
+We now introduce another sorting algorithm: \textit{selection sort}. This maintains the following loop
+invariant: \textit{at the start of each outer for loop, the subarray A[1:i - 1] consists of the i - 1 smallest
+elements in the array A[1:n], and they are in sorted order}. It starts with a left (empty) subarray and
+the right subarray (which is just the array). It simply searches the right subarray for the
+lowest element and exchanges it with the first element in the right subarray. It then iterates over this, considering
+the left subarray to contain the former first element of the right array, thus shrinking the right array. This is made more
+explicit in the pseudocode below:
+\begin{lstlisting}
+    SELECTION-SORT(A, n)
+    for i = 1 to n - 1
+        smallest = i
+        for j = i + 1 to n
+            if A[j] < A[smallest]
+                smallest = j
+        exchange A[i] with A[smallest]
+\end{lstlisting}
+This has average-case and worst-case running time $\Theta(n^2)$.
 
 \end{document}
