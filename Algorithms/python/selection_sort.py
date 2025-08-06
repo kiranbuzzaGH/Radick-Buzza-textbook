@@ -9,18 +9,17 @@ def selection_sort(A, n):
     """
     # Traverse list from 0 to n - 2 (where n - 1 is the index of the final value)
     for i in range(n - 1):
-        key = A[i]
-        smallest_index = i
+        smallest = i
 
         # Traverse list from the index after the current ith value to the end
         # Recall that python's range is not inclusive for the upper bound
         for j in range(i + 1, n):
-            if A[j] < A[i]:
-                A[i] = A[j]
-                smallest_index = j
+            if A[j] < A[smallest]:
+                smallest = j
 
-        A[smallest_index] = key
-
+        temp = A[i]
+        A[i] = A[smallest]
+        A[smallest] = temp
 
 if __name__ == "__main__":
 
