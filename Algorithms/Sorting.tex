@@ -177,5 +177,105 @@ explicit in the pseudocode below:
 This has average-case and worst-case running time $\Theta(n^2)$.
 
 \section{Merge Sort}
+There are many algorithm design techniques. Insertion sort used the incremental method. We will now consider
+the \textit{Divide-and-conquer method}.
+
+Many useful algorithms are recursive in structure: to solve a given problem, they recurse (call themselves) one
+or more times to handle closely related subproblems. These algorithms typically follow the divide-and-conquer method:
+if the problem is small enough (as in the base case), you solve directly
+without recursing. Otherwise, you perform the following steps: \textbf{divide} the problem into smaller instances
+of the same problem; \textbf{conquer} the subproblems by solving recursively; \textbf{combine} the subproblem
+solutions to form a solution to the original problem.
+
+The merge sort algorithm follows divide-and-conquer closely. \textbf{Divide} the subarray to be sorted, \texttt{A[p:r]},
+into two adjacent subarrays, each of half the size (approximately). Do this by computing the midpoint q of \texttt{A[p:r]}
+(taking the average of p and r) and thus dividing A into subarrays \texttt{A[p:q]} and \texttt{A[q + 1:r]}. \textbf{Conquer} by sorting each of
+the two subarrays recursively using merge sort. \textbf{Combine} by \textit{merging} the sorted subarrays back into a single sorted subarray, producing the sorted answer.
+The base case is when the subarray is just one element (that is, when p = r).
+\begin{lstlisting}
+    MERGE(A, p, q, r)
+    n_L = q - p + 1     // Length of first subarray
+    n_R = r - q         // Length of second subarray
+    let L[0:n_L - 1] and R[0:n_R - 1] be new arrays
+
+    for i = 0 to n_L - 1
+        L[i] = A[p + i]
+    for j = 0 to n_R - 1
+        R[j] = A[q + 1 + j]
+
+    i = 0
+    j = 0
+    k = 0
+
+    while i < n_L and j < n_R
+        if L[i] <= R[j]
+            A[k] = L[i]
+            i = i + 1
+        else
+            A[k] = R[j]
+            j = j + 1
+        k = k + 1
+
+    // Copy remainder of unmerged array accross
+    while i < n_L
+        A[k] = L[i]
+        i = i + 1
+        k = k + 1
+    while j < n_R
+        A[k] = R[j]
+        j = j + 1
+        k = k + 1
+\end{lstlisting}
+
+It may be easier to visualise this as two sorted piles of cards face up (that is so only 2 cards are visible at a time) with an empty stack face down. At each iteration,
+take the visible card with the lowest value and place it face down of the initially empty pile. Iterate until one of the face up piles is empty.
+At this point, flip the remaining pile and add it to the end of the facedown stack. Note that, as both piles are sorted,
+the best case takes n / 2 steps as it is necessary to individually copy every card in at least one of the
+piles. The worst case is n - 1 (that is, going through every card). Thus merging takes $\Theta(n)$ time. To see this,
+observe that the variable initializations take constant time, the for loops take $\Theta(n_L + n_R) = \Theta(n)$
+and the outcome of all the while loops is to copy every element in the array across once. Thus, the running time is $\Theta(n)$.
+
+\begin{lstlisting}
+    MERGE-SORT(A, p, r)
+    if p >= r       // zero or one elements
+        return
+    q = \lfloor (q + r) / 2 \rfloor
+    MERGE-SORT(A, p, q)
+    MERGE-SORT(A, q + 1, r)
+    MERGE(A, p, q, r)
+\end{lstlisting}
+Note that $\lceil x \rceil$ denotes the least integer that is greater than or equal to x, and $\lfloor x \rfloor$
+denotes the greatest integer that is less than or equal to x.
+
+\subsection{Analysis of Divide-and-Conquer Algorithms}
+When an algorithm contains a recursive call, you can often describe its running time by a \textit{recurrence equation}, which
+describes the overall running time on a problem of size n, in terms of the running time of the same algorithm with smaller inputs.
+
+Generally, let the worst case running time of a divide-and-conquer algorithm be given by
+\[ T(n) =
+  \begin{cases}
+    \Theta(n)       & \quad \text{if } n < n_0\\
+    D(n) + aT(\frac{n}{b}) + C(n)  & \quad \text{otherwise}
+  \end{cases}
+\]
+where $D(n)$ is the cost to divide and $C(n)$ is the cost to combine, and the problem is divided into
+$a$ subproblems of size $\frac{n}{b}$. For example, merge sort divides into two subproblmens of size
+$\left \lfloor \frac{n}{2} \right \rfloor$ and $\left \lceil \frac{n}{2} \right \rceil$ respectively.
+
+For merge sort, the divide step computes the middle of the subarray, which is constant time. The conquer step recursively
+solves two subproblems of size $\frac{n}{2}$ so contributes a $2T(\frac{n}{2})$ term. Combine is executed by merge, which
+we showed takes linear time. Thus $T(n) = 2T(\frac{n}{2}) + \Theta(n)$, which we can also write as
+\[ T(n) =
+  \begin{cases}
+    c_1       & \quad \text{if } n = 1\\
+    2T(\frac{n}{2}) + c_2n  & \quad \text{if } n > 1
+  \end{cases}
+\]
+It turns out that $T(n) = \Theta(n\lg n)$, which we shall prove later. This can be intuitively seen from a recursion tree (see Figure \ref{Figure: recursion tree}).
+\begin{figure}[ht]\centering\label{Figure: recursion tree}
+    \includegraphics[angle=0]{Figures/recursion-tree.pdf}
+    \caption{Recursion tree providing intuition for the total cost, by progressively expanding T(n) until
+    it reaches the base case layer (the leaves).}
+\end{figure}
 
 \end{document}
