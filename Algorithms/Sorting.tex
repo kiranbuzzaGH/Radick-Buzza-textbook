@@ -51,9 +51,10 @@ array, from right to left. When there is a value that is less than the key, inse
 this value, shifting all the values above this along by one. Repeating this with every element in the right array
 will eventually result in a sorted array. See Figure \ref{Figure: insertion sort} for a visual representation.
 
-\begin{figure}[ht]\centering\label{Figure: insertion sort}
+\begin{figure}[ht]\centering
     \includegraphics[angle=0]{Figures/insertion-sort.pdf}
     \caption{Visual representation of the insertion sort algorithm.}
+    \label{Figure: insertion sort}
 \end{figure}
 
 We want to prove that this is a correct algorithm. We can do this by mathematical induction using a \textit{loop invariant}.
@@ -121,9 +122,10 @@ We shall analyse insertion sort to demonstrate this analysis process. See Figure
 of the algorithm with the cost of each step. Denote the number of times the while loop executes the \texttt{for i = 2 to n} with $t_i$.
 Thus, we must sum over the i to get the number of times these lines will execute. Note that the \textbf{for}
 and \textbf{while} loop execute one extra time than their bodies to account for the terminating check (that is, they execute $(n - 1) + 1$ times).
-\begin{figure}[ht]\centering\label{Figure: insertion sort with costs}
+\begin{figure}[ht]\centering
     \includegraphics[angle=0]{Figures/insertion-sort-with-costs.pdf}
     \caption{Pseudocode of insertion sort with the cost of each step.}
+    \label{Figure: insertion sort with costs}
 \end{figure}
 The running time is the cost multiplied by the number of times this step occurs. Thus the running time
 for insertion sort is $T(n) = c_1 + c_2(n - 1) + c_4(n - 1) + c_5\sum_{i = 2}^{n}t_i + c_6\sum_{i = 2}^{n}(t_i - 1)
@@ -235,11 +237,11 @@ piles. The worst case is n - 1 (that is, going through every card). Thus merging
 observe that the variable initializations take constant time, the for loops take $\Theta(n_L + n_R) = \Theta(n)$
 and the outcome of all the while loops is to copy every element in the array across once. Thus, the running time is $\Theta(n)$.
 
-\begin{lstlisting}
+\begin{lstlisting}[mathescape]
     MERGE-SORT(A, p, r)
     if p >= r       // zero or one elements
         return
-    q = \lfloor (q + r) / 2 \rfloor
+    q = $\lfloor$(q + r) / 2$\rfloor$
     MERGE-SORT(A, p, q)
     MERGE-SORT(A, q + 1, r)
     MERGE(A, p, q, r)
@@ -272,10 +274,11 @@ we showed takes linear time. Thus $T(n) = 2T(\frac{n}{2}) + \Theta(n)$, which we
   \end{cases}
 \]
 It turns out that $T(n) = \Theta(n\lg n)$, which we shall prove later. This can be intuitively seen from a recursion tree (see Figure \ref{Figure: recursion tree}).
-\begin{figure}[ht]\centering\label{Figure: recursion tree}
+\begin{figure}[ht]\centering
     \includegraphics[angle=0]{Figures/recursion-tree.pdf}
     \caption{Recursion tree providing intuition for the total cost, by progressively expanding T(n) until
     it reaches the base case layer (the leaves).}
+    \label{Figure: recursion tree}
 \end{figure}
 
 \subsection{Binary Search}
