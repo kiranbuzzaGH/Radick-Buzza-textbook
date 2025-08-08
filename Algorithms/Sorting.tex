@@ -192,22 +192,22 @@ into two adjacent subarrays, each of half the size (approximately). Do this by c
 (taking the average of p and r) and thus dividing A into subarrays \texttt{A[p:q]} and \texttt{A[q + 1:r]}. \textbf{Conquer} by sorting each of
 the two subarrays recursively using merge sort. \textbf{Combine} by \textit{merging} the sorted subarrays back into a single sorted subarray, producing the sorted answer.
 The base case is when the subarray is just one element (that is, when p = r).
-\begin{lstlisting}
+\begin{lstlisting}[mathescape]
     MERGE(A, p, q, r)
-    n_L = q - p + 1     // Length of first subarray
-    n_R = r - q         // Length of second subarray
-    let L[0:n_L - 1] and R[0:n_R - 1] be new arrays
+    $n_L$ = q - p + 1     // Length of first subarray
+    $n_R$ = r - q         // Length of second subarray
+    let L[0:$n_L$ - 1] and R[0:$n_R$ - 1] be new arrays
 
-    for i = 0 to n_L - 1
+    for i = 0 to $n_L$ - 1
         L[i] = A[p + i]
-    for j = 0 to n_R - 1
+    for j = 0 to $n_R$ - 1
         R[j] = A[q + 1 + j]
 
     i = 0
     j = 0
     k = 0
 
-    while i < n_L and j < n_R
+    while i < $n_L$ and j < $n_R$
         if L[i] <= R[j]
             A[k] = L[i]
             i = i + 1
@@ -217,11 +217,11 @@ The base case is when the subarray is just one element (that is, when p = r).
         k = k + 1
 
     // Copy remainder of unmerged array accross
-    while i < n_L
+    while i < $n_L$
         A[k] = L[i]
         i = i + 1
         k = k + 1
-    while j < n_R
+    while j < $n_R$
         A[k] = R[j]
         j = j + 1
         k = k + 1
@@ -277,5 +277,27 @@ It turns out that $T(n) = \Theta(n\lg n)$, which we shall prove later. This can 
     \caption{Recursion tree providing intuition for the total cost, by progressively expanding T(n) until
     it reaches the base case layer (the leaves).}
 \end{figure}
+
+\subsection{Binary Search}
+Another example of a divide-and-conquer algorithm is \textit{binary search}, which is a searching algorithm.
+It specifically searches for some element $x$ in a sorted array $A$. It does this by finding the midpoint of the
+boundaries of the array being searched and compares the value in this position to $x$. If they are equal, it returns
+the midpoint (specifically, the index). If $x > A[mid]$, it performs the same action on the right (higher) half of the array.
+Otherwise, it performs the same action on the left (lower) half of the array. This can be done iteratively (by using a while loop
+that checks if the boundaries have crossed each other and updating the boundaries after each iteration) or recursively (by calling binary
+search on progressively smaller subarrays). After each iteration, the number of elements to be checked halves, so binary search has a
+recurrence $T(n) = T(\frac{n}{2}) + \Theta(1)$. Thus, the worst-case running time is $\Theta(\lg n)$, as this solves the recurrence.
+\begin{lstlisting}[mathescape]
+    RECURSIVE-BINARY-SEARCH(A, x, low, high)
+    if low > high
+        return NIL
+    mid = $\lfloor$(low + high) / 2$\rfloor$
+    if x == A[mid]
+        return mid
+    else if x > A[mid]
+        return RECURSIVE-BINARY-SEARCH(A, x, mid + 1, high)
+    else
+        return RECURSIVE-BINARY-SEARCH(A, x, low, mid - 1)
+\end{lstlisting}
 
 \end{document}
