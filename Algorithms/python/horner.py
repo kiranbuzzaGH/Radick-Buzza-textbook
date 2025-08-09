@@ -8,7 +8,7 @@ def horner(A, x, n=None):
 
     Arguments
     A -- a list/array of the coefficients
-    n -- the number of terms (non-zero or otherwise) (default = None)
+    n -- the highest power (= size of A - 1) (default = None)
     x -- the value with which the polynomial is being evaluated
     """
     if n is None:
