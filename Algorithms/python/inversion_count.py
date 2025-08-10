@@ -116,7 +116,3 @@ if __name__ == "__main__":
     inversions7 = count_inversions(array4)
     print("large array")
     print(inversions7)
-
-
-
-

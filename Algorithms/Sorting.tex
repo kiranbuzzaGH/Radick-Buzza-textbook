@@ -178,6 +178,16 @@ explicit in the pseudocode below:
 \end{lstlisting}
 This has average-case and worst-case running time $\Theta(n^2)$.
 
+\subsection{Bubble Sort}
+We will briefly mention another simple but inefficient (that is, $\Theta(n^2)$) sorting algorithm.
+\begin{lstlisting}
+    BUBBLE-SORT(A, n)
+    for i = 1 to n - 1
+        for j = n downto i + 1
+            if A[j] < A[j - 1]
+                exchange A[j] with A[j - 1]
+\end{lstlisting}
+
 \section{Merge Sort}
 There are many algorithm design techniques. Insertion sort used the incremental method. We will now consider
 the \textit{Divide-and-conquer method}.
@@ -207,7 +217,7 @@ The base case is when the subarray is just one element (that is, when p = r).
 
     i = 0
     j = 0
-    k = 0
+    k = p
 
     while i < $n_L$ and j < $n_R$
         if L[i] <= R[j]
@@ -248,6 +258,11 @@ and the outcome of all the while loops is to copy every element in the array acr
 \end{lstlisting}
 Note that $\lceil x \rceil$ denotes the least integer that is greater than or equal to x, and $\lfloor x \rfloor$
 denotes the greatest integer that is less than or equal to x.
+
+As an aside, \textit{coarsening} the leaves of the recursion and using insertion sort for subproblems of
+a specific (and sufficiently small size) can sometimes produce a faster running time. This splits the array into $\frac{n}{k}$
+subarrays of size $k$ (instead of splitting the array into $n$ subarrays of size $1$ as in traditional merge sort) and sorts each
+subarray with insertion sort, then merging them as normal. This modified algorithm has running time $\Theta(nk + n\lg(n/k))$.
 
 \subsection{Analysis of Divide-and-Conquer Algorithms}
 When an algorithm contains a recursive call, you can often describe its running time by a \textit{recurrence equation}, which
