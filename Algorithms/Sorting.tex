@@ -318,4 +318,31 @@ recurrence $T(n) = T(\frac{n}{2}) + \Theta(1)$. Thus, the worst-case running tim
         return RECURSIVE-BINARY-SEARCH(A, x, low, mid - 1)
 \end{lstlisting}
 
+\section{Complexity and O-notation}
+When we look at input sizes sufficiently latge such that the order of growth is the only thing that impacts
+the running time, we are studying the \textit{asymptotic} efficiency of algorithms. That is, how does the
+running time of an algorithm depend on the size of the input $n$ in the limit $n \rightarrow \infty$.
+
+\subsection{Asymptotic Notation}
+\textbf{O-notation}: upper bound on the asymptotic behaviour of a function. That is, the function grows
+no faster than a certain rate (based on the highest order term).
+\newline \textbf{$\Omega$-notation}: lower bound on the asymptotic behaviour of a function. That is, the function grows
+at least as fast as a certain rate (based on the highest order term).
+\newline \textbf{$\Theta$-notation}: tight bound on the asymptotic behaviour of a function. That is, the function grows
+precisely at a certain rate (based on the highest order term).
+
+Note that saying the worst case running time is $\Omega(n^2)$ is not the same as saying that all inputs take
+at least $cn^2$ steps, but rather that there exists at least one input, of size $n$, that takes at least $cn^2$
+for every input size $n$ above a certain value.
+
+For example, insertion sort has $O(n^2)$ as the outer \textbf{for} loop undergoes $n - 1$ iterations and the worst
+case for the inner \textbf{while} loop is for it to iterate $i - 1$ times (with $i = n$ as it is the worst case). Thus, the
+running time is characterised by $(n - 1)(n - 1) = O(n^2)$. It also has $\Omega(n^2)$ by the following argument: assume that
+the input array has size $n$ and that the first $\alpha n$ values are the largest, where $0 < \alpha \leq \frac{1}{2}$. To sort
+by insertion sort, these $\alpha n$ values need to be moved through the middle $(1 - 2\alpha)n$ positions, one position at a time,
+to end up in the last $\alpha n$ positions. Thus, there are at least $\alpha(1 - 2\alpha)n^2 = \Omega(n^2)$ steps\footnote{As an aside,
+this value is maximised when $\alpha = \frac{1}{4}$}. Given that the lower and upper bounds both constrain insertion sort to
+quadratic time, we can also say that it has a running time of $\Theta(n^2)$.
+
+
 \end{document}
