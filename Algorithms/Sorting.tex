@@ -446,6 +446,50 @@ This property also applies to $O, \Omega, o \text{ and }\omega$.
     f(n)&= O(g(n) \text{ if and only if } g(n) = \Omega(f(n)).
 \end{align*}
 
+\section{Common functions}
+We shall now take a brief break from sorting algorithms and asymptotic notation to present some miscellaneous
+standard definitions and results.
+
+A function is \textit{monotonically increasing} if $m \leq n \implies f(m) \leq f(n)$.
+A function is \textit{monotonically decreasing} if $m \leq n \implies f(m) \geq f(n)$.
+A function is \textit{strictly increasing} if $m < n \implies f(m) < f(n)$.
+A function is \textit{strictly decreasing} if $m < n \implies f(m) > f(n)$.
+
+$n = \lfloor n\rfloor = \lceil n\rceil$ for any integer $n$, trivially. $x - 1 < \lfloor x\rfloor \leq x
+\leq \lceil x\rceil < x + 1$ for all real $x$ follows immediately from the definition. The following statements are equivalent:
+$-\lfloor x \rfloor = \lceil-x\rceil$ and $-\lceil x \rceil = \lfloor-x\rfloor$. Also, for any integer
+$n$ and real number $x$, we have $\lfloor n + x\rfloor = n+ \lfloor x\rfloor$ and $\lceil n + x\rceil = n+ \lceil x\rceil$.
+
+For any integer $a$ and any positive integer $n$, the value $a\mod n$ is the \textit{remainder} or
+\textit{residue} of the quotient $\frac{a}{n}$. That is, $a \mod n = a - n\left\lfloor\frac{a}{n}\right\rfloor$.
+If $(a\mod n) = (b\mod n)$, we write $a = b \;(\text{mod } n)$ and say that $a$ is equivalent to $b$ modulo $n$.
+
+Given a nonnegative integer $d$, a polynomial in $n$ of degree $d$ is a function of the form $p(n) = \sum_{i = 0}^{d}a_in^i$
+where the constants $a_0, a_1, ..., a_d$ are the coefficients of the polynomial and $a_d \neq 0$. We say that
+a function $f(n)$ is \textit{polynomially bounded} if $f(n) = O(n^k)$ for some constant $k$. We say that a function $f(n)$
+is \textit{polylogarithmically bounded} if $f(n) = O(\lg^kn)$ for some constant k.
+
+We can relate the growth of polynomials and exponentials with the following: for all real constants $a > 1$ and $b$, we have
+$\displaystyle \lim_{n\to\infty}\frac{n^b}{a^n} = 0$, from which we can conclude that $n^b = o(a^n)$
+(as $\displaystyle\lim_{n\to\infty}\frac{f(n)}{g(n)} = 0$ is a weaker definition of $f(n) = o(g(n))$).
+
+The following results are often useful in proofs: $a^{mn} = (a^m)^n = (a^n)^m$ and $a = b^{\log_{b}a}$.
+
+\textit{Stirling's approximation} states that $n! = \sqrt{2\pi n}\left(\frac{n}{e}\right)^n(1 + \Theta\left(\frac{1}{n}\right))$
+where $e$ is the base of the natural logarithm. This gives a lower bound (and a tighter upper bound than the
+more obvious $n! \leq n^n$).
+
+Define the \textit{Fibonacci numbers} $F_i$, for $i \geq 0$ as follows:
+\[ F_i =
+  \begin{cases}
+    0 & \quad \text{if } i = 0\\
+    1 & \quad \text{if } i = 1\\
+    F_{i - 1} + F_{i - 2} & \quad \text{if } i \geq 2
+  \end{cases}
+\]
+Fibonacci numbers are related to the golden ratio $\phi$ and its conjugate $\hat{\phi}$, which are
+the two roots of the equation $x^2= x + 1$, by the equation $F_i= \frac{\phi^i - \hat{\phi}^i}{\sqrt{5}}$ (which
+one can prove by induction).
 
 
 \end{document}
