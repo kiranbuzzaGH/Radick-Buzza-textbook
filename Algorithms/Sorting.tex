@@ -446,6 +446,9 @@ This property also applies to $O, \Omega, o \text{ and }\omega$.
     f(n)&= O(g(n) \text{ if and only if } g(n) = \Omega(f(n)).
 \end{align*}
 
+Before we move on, note that $f(n) = o(g(n)) \implies f(n) = O(g(n))$ and $f(n) = \omega(g(n)) \implies f(n) = \Omega(g(n))$.
+Also, if $f(n) = \omega(g(n))$, then $f(n) = o(g(n))$ can't be true (and vice versa).
+
 \section{Common functions}
 We shall now take a brief break from sorting algorithms and asymptotic notation to present some miscellaneous
 standard definitions and results.
@@ -473,7 +476,9 @@ We can relate the growth of polynomials and exponentials with the following: for
 $\displaystyle \lim_{n\to\infty}\frac{n^b}{a^n} = 0$, from which we can conclude that $n^b = o(a^n)$
 (as $\displaystyle\lim_{n\to\infty}\frac{f(n)}{g(n)} = 0$ is a weaker definition of $f(n) = o(g(n))$).
 
-The following results are often useful in proofs: $a^{mn} = (a^m)^n = (a^n)^m$ and $a = b^{\log_{b}a}$.
+The following results are often useful in proofs: $a^{mn} = (a^m)^n = (a^n)^m$ and $a = b^{\log_{b}a}$. Also, recall
+that ${(x^y)}^z \neq x^{(y^z)}$. That is, exponentiation is \textit{not} associative. $x^{(y^z)} = x^{y^z}$ whereas
+$(x^y)^z = x^{yz}$.
 
 \textit{Stirling's approximation} states that $n! = \sqrt{2\pi n}\left(\frac{n}{e}\right)^n(1 + \Theta\left(\frac{1}{n}\right))$
 where $e$ is the base of the natural logarithm. This gives a lower bound (and a tighter upper bound than the
