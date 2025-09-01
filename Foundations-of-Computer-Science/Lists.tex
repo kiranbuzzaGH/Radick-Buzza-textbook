@@ -120,5 +120,11 @@ When using \texttt{h::t} as an argument in a function, remember to enclose it in
   let rev l = rev_inner [] l
 \end{lstlisting}
 
+As an aside, while tail recursion is certainly more efficient than normal recursion, it is not necessarily worth
+aiming for efficiency at the expense of simplicity. In more involved situations, tail recursion can lead
+to bulky function calls with many arguments. For the most part, write correct programs that avoid any
+especially obvious and gross inefficiencies, while being as straightforward as possible. If the program is
+too slow, then it is permissible to refactor it in a more subtly efficient way.
+
 
 \end{document}
