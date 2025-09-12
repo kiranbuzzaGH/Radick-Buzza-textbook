@@ -344,15 +344,61 @@ Here is a further proof to provide more examples of Set Theoretic proofs.
 \end{proof}
 
 \section{Complements and Powers}
-The \textit{difference}  between sets $A$ and $B$, or \textit{relative complement} of $B$ in $A$, is
+The \textit{difference} between sets $A$ and $B$, or \textit{relative complement} of $B$ in $A$, is
 defined by
 \begin{equation}
-    A- B = \{x: x \in A \text{and} x \notin B\}.
+    A - B = \{x: x \in A \text{and} x \notin B\}.
 \end{equation}
-Consider some set $E$ and its collection of subsets. Although the above definition doesn't restrict one
-to consider $A$ to be a subset of $B$, it is nonetheless valuable to do so as we develop the basic properties
-of the complement, as it simplifies things (see Halmos for a brief explaination).
 
+Consider some set $E$ and its collection of subsets. We can then consider the complement of one of these
+subsets (with respect to $E$) as the absolute complement. Denote the (temporarily) absolute complement of $A$
+as $A'$. With this notation, we can state various basic facts (proofs in Appendix \ref{Appendix: Complements and Powers proofs}):
+
+\begin{remark}
+    $(A')' = A$
+\end{remark}
+
+\begin{remark}
+    $A \subset B$ if and only if $B' \subset A'$
+\end{remark}
+
+The following properties are known as the \textit{De Morgan laws}:
+\begin{equation}
+    (A \cup B)' = A' \cap B'
+\end{equation}
+\begin{equation}
+    (A \cap B)' = A' \cup B'
+\end{equation}
+It is common for set theory properties to come in pairs. That is, replacing every set by its complement,
+reversing inclusions and swapping unions and intersetions produces another theorem. This is known as the \textit{principle
+of duality}.
+
+\begin{remark}
+    $A - B = A \cap B'$
+\end{remark}
+\begin{proof}
+    \begin{eqnarray*}
+        A - B &=\{x: x \in A \text{ and } x \notin B\}\\
+              &= \{x: x \in A \text{ and } x \in B'\}\\
+              &= A \cap B'
+    \end{eqnarray*}
+\end{proof}
+
+The \textit{symmetric difference} or \textit{Boolean sum} of two sets, $A$ and $B$, is
+defined by $A + B = (A - B) \cup (B - A)$. This is both commutative and associative.
+
+Let us now formalise the set of all subsets of some set:
+\begin{axiom}[Axiom of powers]
+    For each set there exists a collection of sets that contains among its elements all the subsets
+    of the given set.
+\end{axiom}
+Note that collection has been used instead of set to aid clarity. Symbolically, if $E$ is some set, there
+exists some set $\mathcal{P}$ such that if $X \subset E$, then $X \in \mathcal{P}$. In order to construct
+a set that \textit{only} contains the subsets of a given set, apply the axiom of specification with the
+condition that $X \subset E$. That is, the set is $\{X \in \mathcal{P}: X \subset E\}$. Given that any
+set that satisfies the condition also satisfies $X \in \mathcal{P}$ by definition, change the notation
+such that $\mathcal{P} = \{X: X \subset E\}$. This set is called the \textit{power set}, more specifically
+notated as $\mathcal{P}(E)$ to highlight that it contains all the subsets of $E$.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -554,4 +600,112 @@ The following are the proofs for the analagous properties of intersections of pa
                  &= A.
     \end{align*}
 \end{proof}
+
+\section{Proofs of Complements and Powers properties}\label{Appendix: Complements and Powers proofs}
+\begin{remark}
+    $A \subset B$ if and only if $B' \subset A'$
+\end{remark}
+\begin{proof}
+    If $x \in B' \implies x \in A'$, then there is no case where $x$ isn't in $B$ where it is in $A$.
+    Thus, if $x \in A$, it must be in $B$ also so $x \in A \implies x \in B$.
+
+    For the reverse direction, if $x \in A \implies x \in B$ there is no case where $x$ is in $A$ where it isn't also
+    in $B$. Thus, if $x$ isn't in $B$, it can't be in $A$ either. Thus, $x \in B' \implies x \in A'$.
+\end{proof}
+
+The following are the proofs of the De Morgan Laws:
+\begin{remark}
+    $(A \cup B)' = A' \cap B'$
+\end{remark}
+\begin{proof}
+    We shall prove this by showing that each side is a subset of the other side respectively.
+
+    Let $x \in (A \cup B)'$. That is, $x \notin A \cup B$. $A \cup B = \{y: y \in A \text{ or } y \in B\}$
+    so both $x \notin A$ and $x \notin B$. Thus, $x \in A'$ and $x \in B'$, which implies that
+    $x \in A' \cap B'$. Thus, $(A \cup B)' \subset A' \cap B'$.
+
+    Let $x \in A' \cap B'$. Assume that $x \in A \cup B$. $x \in A' \cap B' \implies x \notin A \text{ and }
+    x \notin B$ are both true. Thus there is no $x$ for which $x \in A$ or $x \in B$ and so we have found
+    a contradiction. Thus $x \in (A \cup B)'$ and we can conlude $(A \cup B)' \supset A' \cap B'$
+\end{proof}
+
+\begin{remark}
+    $(A \cap B)' = A' \cup B'$
+\end{remark}
+\begin{proof}
+    We shall prove this by showing that each side is a subset of the other side respectively.
+
+    Let $x \in (A \cap B)'$. That is, $x \notin A \cap B$. $A \cap B = \{y: y \in A \text{ and } y \in B\}$
+    so either $x \notin A$ or $x \notin B$ or both, which implies that
+    $x \in A' \cup B'$ (as $A' \cup B' = \{x: x \in A' \text{ or } x \in B'$\}). Thus, $(A \cap B)' \subset A' \cup B'$.
+
+    Let $x \in A' \cup B'$. Assume that $x \in A \cap B$. $x \in A' \cup B' \implies x \notin A$ and
+    $x \notin B$, which contradicts the assumption. Thus $x \in (A \cap B)'$ and we can conlude $(A \cap B)' \supset A' \cup B'$
+\end{proof}
+
+\begin{remark}[Commutativity]
+    $A + B = B + A$
+\end{remark}
+\begin{proof}
+    \begin{align*}
+        A + B &= (A - B) \cup (B - A)\\
+              &= \{x: x \in (A - B) \text{ or } x \in (B - A)\}\\
+              &= \{x: x \in (B - A) \text{ or } x \in (A - B)\}\\
+              &= B + A
+    \end{align*}
+\end{proof}
+
+\begin{remark}[Associativity]
+    $A + (B + C) = (A + B) + C$
+\end{remark}
+\begin{proof}
+    We shall prove this by considering every case where some $x$ belongs to some combination of $A, B$
+    and $C$. There are eight such cases (draw a Venn diagram to convince yourself that these are all the cases):
+    \begin{itemize}
+        \item $x \in A, x \in B, x \in C$
+        \item $x \in A, x \in B, x \notin C$
+        \item $x \in A, x \notin B, x \in C$
+        \item $x \notin A, x \in B, x \in C$
+        \item $x \in A, x \notin B, x \notin C$
+        \item $x \notin A, x \in B, x \notin C$
+        \item $x \notin A, x \notin B, x \in C$
+        \item $x \notin A, x \notin B, x \notin C$
+    \end{itemize}
+    If we show associativity holds for each case exhaustively, then it must hold generally.
+
+    Consider $x \in A, x \in B, x \in C$.
+    $(B + C) = (B - C) \cup (C - B) = (B \cap C')\cup (C \cap B')$
+    We know that $x \notin C'$ so $x \notin B \cap C'$. Similarly, we know that
+    $x \notin B'$ so $x \notin C \cap B'$. Thus $x \notin (B + C)$.
+
+    Let $D = (B + C)$. Thus, $A + (B + C) = A + D = (A \cap D')\cup (D \cap A')$.
+    From above, $x \notin D$ so $x \in (A \cap D')$ and thus $x \in (A \cap D')\cup (D \cap A')$.
+    Therefore, $x \in A + (B + C)$
+
+    We can make a similar argument to show that $x \in (A + B) + C$ but given the symmetry of this case
+    (note that symmetric difference is commutative), we can immediately conclude this (see this by rewriting
+    $A + (B + C) = (C + B) + A$).
+
+    Now consider $x \notin A, x \in B, x \in C$.
+
+    We know that $x \notin C'$ so $x \notin B \cap C'$. Similarly, we know that
+    $x \notin B'$ so $x \notin C \cap B'$. Thus $x \notin (B + C)$ (or $x \notin D$).
+
+    $x \notin A \implies x \notin A \cap D'$. Similarly, $x \notin D \implies x \notin D \cap A'$.
+    Thus, $x \notin A + D$ so $x \notin A + (B + C)$.
+
+    We know that $x \in A'$ so $x \in B \cap A'$. Thus $x \in (A + B)$.
+
+    Let $E = A + B$, such that $E + C = (E \cap C') \cup (C \cap E')$. We know that $x \notin C'$ so
+    $x \notin E \cap C'$. Similarly, $x \in (A + B) \implies x \in E$ (or equivalently, $x \notin E'$)
+    so $x \notin (C \cap E')$. Thus $x \notin E + C$ so $x \notin (A + B) + C$.
+
+    We can consider the rest of the cases by similar arguments (you should do this to complete the proof). In doing so, every value of
+    $x$ is exhaustively considered. There is no element belonging to $A + (B + C)$ that does not also
+    belong to $(A + B) + C$ and vice versa.
+
+    Thus $A + (B + C) = (A + B) + C$ by the axiom of extension.
+\end{proof}
+
+
 \end{document}
