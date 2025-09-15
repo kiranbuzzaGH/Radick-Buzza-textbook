@@ -371,7 +371,7 @@ The following properties are known as the \textit{De Morgan laws}:
 \end{equation}
 It is common for set theory properties to come in pairs. That is, replacing every set by its complement,
 reversing inclusions and swapping unions and intersetions produces another theorem. This is known as the \textit{principle
-of duality}.
+of duality}. The De Morgan laws are an example of this.
 
 \begin{remark}
     $A - B = A \cap B'$
@@ -419,10 +419,28 @@ One may notice a pattern and assert the following (which we will consequently pr
     element set contains $2^n + 2^n = 2 \times 2^n = 2^{n + 1}$. This completes the inductive argument.
 \end{proof}
 
-The general forms of the De Morgan Laws can be written as follows:
-\begin{equation}
-    (\bigcup_{X \in \mathcal{C}})
-\end{equation}
+The general forms of the De Morgan Laws can be written with the following notation:
+\begin{align}
+    \left(\bigcup_{X \in \mathcal{C}}X\right)' &= \bigcap_{X \in \mathcal{C}}X'\\
+    \left(\bigcap_{X \in \mathcal{C}}X\right)' &= \bigcup_{X \in \mathcal{C}}X'
+\end{align}
+\begin{proof}
+    We shall only prove the former, as both proofs are similar.
+
+    Let $\bigcup_{X \in \mathcal{C}}X = \{x: x \in X \text{ for some } X \in \mathcal{C}\}$ and $\bigcap_{X \in \mathcal{C}}X'
+    = \{x: x \in X' \text{ for every } X \in \mathcal{C}\}$, where $\mathcal{C}$ is a collection of subsets of
+    some set $E$.
+
+    If $x \in \left(\bigcup_{X \in \mathcal{C}}X\right)'$ then $x \notin \bigcup_{X \in \mathcal{C}}X$. Thus,
+    there is no $X$ in $\mathcal{C}$ for which $x \in X$. Thus, $x \in X'$ for every $X$ in $\mathcal{C}$, and so
+    we conclude that $x \in \bigcap_{X \in \mathcal{C}}X'$.
+
+    For the reverse direction, let $x \in \bigcap_{X \in \mathcal{C}}X'$. Thus, $x \in X'$ for every
+    $X$ in $\mathcal{C}$, or equivalently, there is no $X$ in $\mathcal{C}$ which contains $x$. This is
+    equivalent to $x \notin \bigcup_{X \in \mathcal{C}}X$, or $x \in (\bigcup_{X \in \mathcal{C}}X)'$.
+
+    Thus, we have shown that each side is a subset of the other and thus we have proven equality.
+\end{proof}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
