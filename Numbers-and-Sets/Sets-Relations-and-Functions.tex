@@ -400,6 +400,30 @@ set that satisfies the condition also satisfies $X \in \mathcal{P}$ by definitio
 such that $\mathcal{P} = \{X: X \subset E\}$. This set is called the \textit{power set}, more specifically
 notated as $\mathcal{P}(E)$ to highlight that it contains all the subsets of $E$.
 
+How many elements does a power set contain? First, let's consider some examples. The set $\mathcal{P}(\emptyset) = \{\emptyset\}$.
+The power set of some singleton is $\mathcal{P}(\{a\}) = \{\emptyset, \{a\}\}$, while $\mathcal{P}(\{a, b\}) = \{\emptyset, \{a\}, \{b\}, \{a, b\}\}$.
+One may notice a pattern and assert the following (which we will consequently prove):
+
+\begin{remark}
+    The power set of a finite set with n-elements has $2^n$ elements.
+\end{remark}
+\begin{proof}
+    Base case: a finite set with zero elements (that is, the empty set), has $2^0 = 1$ element, that being
+    $\{\emptyset\}$.
+
+    Assume the power set of a finite set with n-elements has $2^n$ elements.
+
+    The power set of a finite set with one additional element to the n-element set (that is, one containing $n + 1$ elements)
+    contains all of the $2^n$ subsets in the assumed case, along with the pairs of the new elements with each element. Thus,
+    there are an additional $2^n$ elements in this power set compared with the n-element set. Thus, the $n + 1$
+    element set contains $2^n + 2^n = 2 \times 2^n = 2^{n + 1}$. This completes the inductive argument.
+\end{proof}
+
+The general forms of the De Morgan Laws can be written as follows:
+\begin{equation}
+    (\bigcup_{X \in \mathcal{C}})
+\end{equation}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
