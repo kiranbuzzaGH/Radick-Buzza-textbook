@@ -419,6 +419,42 @@ One may notice a pattern and assert the following (which we will consequently pr
     element set contains $2^n + 2^n = 2 \times 2^n = 2^{n + 1}$. This completes the inductive argument.
 \end{proof}
 
+We shall prove some more useful remarks.
+
+\begin{remark}
+    $\mathcal{P}(E) \cap \mathcal{P}(F) = \mathcal{P}(E \cap F)$
+\end{remark}
+\begin{proof}
+    Let $X \in \mathcal{P}(E)$ and $X \in \mathcal{P}$, such that $X \in \mathcal{P}(E) \cap \mathcal{P}(F)$.
+    Thus, $X \subset E$ and $X \subset F$, so $x \in X \implies x \in E\text{ and } x \in F$.
+    Given that $E \cap F = \{x: x \in E\text{ and } x \in F\}$, $x \in E\cap F$ so $X \subset E \cap F$ and
+    thus, $X \in \mathcal{P}(E \cap F)$.
+
+    Now prove the opposite direction. Let $X \in \mathcal{P}(E \cap F)$, such that $X \subset E \cap F$.
+    Thus, $x \in X \implies x \in E \text{ and } x\in F$. Thus, $X \subset E$ and $X\subset F$, or equivalently,
+    $X \in \mathcal{P}(E)$ and $X \in \mathcal{P}$. Thus $X \in \mathcal{P}(E) \cap \mathcal{P}(F)$.
+\end{proof}
+
+\begin{remark}
+    $\mathcal{P}(E) \cup \mathcal{P}(F) \subset \mathcal{P}(E \cup F)$
+\end{remark}
+\begin{proof}
+    Let $X \in \mathcal{P}(E)$. Thus, $X \in \mathcal{P}(E) \cup \mathcal{P}(F)$. Let $x \in X$. $X \subset
+    E \implies x \in E$ so $x\in E \cup F$. Thus, $X\subset E \cup F$ so $X\in \mathcal{P}(E \cup F)$.
+
+    Let $Y \in \mathcal{P}(F)$. We can immediately conclude that $Y \in \mathcal{P}(E \cup F)$ by symmetry.
+    Thus, $\mathcal{P}(E) \cup \mathcal{P}(F) \subset \mathcal{P}(E \cup F)$.
+\end{proof}
+
+\begin{remark}[Monoticity of power sets]
+    If $E\subset F$, then $\mathcal{P}(E) \subset \mathcal{P}(F)$.
+\end{remark}
+\begin{proof}
+    If $E\subset F$, then $x \in E \implies x \in F$. Recall that $\mathcal{P}(A) = \{X: X\subset A\}$.
+    Let $X\in \mathcal{P}(E)$. For all $x \in X$, the definition of the power set implies that $x\in E$
+    and thus, $x \in F$. Therefore, $X \subset F$ so $X \in \mathcal{P}(F)$. Thus, $E\subset F \implies \mathcal{P}(E) \subset \mathcal{P}(F)$
+\end{proof}
+
 The general forms of the De Morgan Laws can be written with the following notation:
 \begin{align}
     \left(\bigcup_{X \in \mathcal{C}}X\right)' &= \bigcap_{X \in \mathcal{C}}X'\\
