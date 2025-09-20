@@ -478,6 +478,41 @@ The general forms of the De Morgan Laws can be written with the following notati
     Thus, we have shown that each side is a subset of the other and thus we have proven equality.
 \end{proof}
 
+\section{Ordered Pairs}
+Consider an informal construction of the idea of "order", without having an intrinsic understanding of
+what order means. Consider the set of elements $\{a, b, c, d\}$ in the "order" (this has no intrinsic meaning as of yet)
+$c$ $b$ $d$ $a$. Let the collection $\{\{c\}, \{c, b\}, \{c, b, d\}, \{c, b, d, a\}\}$ capture this order. Note that
+the elements in this set can be "reordered" without losing the ability to reconstruct the original order.
+
+With the above in mind, we define the \textit{ordered pair} of $a$ and $b$ to be $(a, b) = \{\{a\}, \{a, b\}\}$ where
+$a$ is the \textit{first coordinate} and $b$ is the \textit{second coordinate}. We must ensure that this definition
+uniquely determines the ordered pair.
+
+\begin{remark}
+    If $(a, b)$ and $(x, y)$ are ordered pairs and if $(a, b) = (x, y)$, then $a = x$ and $b = y$.
+\end{remark}
+\begin{proof}
+    Assert that, if $a = b$, then $(a, b)$ is the singleton $\{a\}$. Conversely, if $(a, b)$ is a singleton, then
+    $\{a\} = \{a, b\}$ and so $b \in \{a\}$ by the axiom of extension. Thus, $a = b$.
+
+    Now consider the case where $a \neq b$. Both $(a, b)$ and $(x, y)$ contain one singleton and one pair
+    respectively. If they are equal, they have the same elements so the singletons must be the same. Thus
+    $\{a\} = \{x\}$ and thus $a = x$. Similarly, the pairs must be equal so $\{a, b\} = \{x, y\}$. Thus $b \in \{x, y\}$.
+    If $b = x$, then $a = b$ and we create a contradiction. Thus $b = y$.
+\end{proof}
+
+We shall now construct a set that contains all the ordered pairs $(a, b)$ where $a \in A$ and $b \in B$.
+Given that $\{a\} \subset A$ and $\{b\} \subset B$, then $\{a, b\}\subset A \cup B$. That is, $\{a\} \in \mathcal{P}(A \cup B)$
+and $\{a, b\} \in \mathcal{P}(A \cup B)$. Thus $\{\{a\}, \{a, b\}\} \subset \mathcal{P}(A \cup B)$, or
+equivalently $\{\{a\}, \{a, b\}\} \in \mathcal{P}(\mathcal{P}(A \cup B))$. Applying the axiom of extension and
+the axiom of specification allows us to construct a unique set that only contains the ordered pairs $(a, b)$ where
+$a \in A$ and $b \in B$. This is the \textit{Cartesian product} of $A$ and $B$, denoted by:
+\begin{equation*}
+    A \times B = \{x: x = (a, b) \text{ for some } a \text{ in } A \text{ and for some } b \text{ in } B\}
+\end{equation*}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
