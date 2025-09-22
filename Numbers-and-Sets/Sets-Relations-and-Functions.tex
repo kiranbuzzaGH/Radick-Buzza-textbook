@@ -511,6 +511,24 @@ $a \in A$ and $b \in B$. This is the \textit{Cartesian product} of $A$ and $B$, 
     A \times B = \{x: x = (a, b) \text{ for some } a \text{ in } A \text{ and for some } b \text{ in } B\}
 \end{equation*}
 
+The Cartesian product and its subsets are sets of ordered pairs. It is also true that every set of
+ordered pairs is a subset of some Cartesian product of two sets. We shall now prove this.
+\begin{remark}
+    If $R$ is a set such that every element of $R$ is an ordered pair, then there exist two sets $A$
+    and $B$ such that $R \subset A \times B$.
+\end{remark}
+\begin{proof}
+    Let $x \in R$ where $x = \{\{a\}, \{a, b\}\}$. We wish to extract $a$ and $b$, so we take the union
+    of $R$: $\{a, b\} \in \bigcup R$. Thus, $a \in \bigcup \bigcup R$ and $b \in \bigcup \bigcup R$.
+    Taking both $A$ and $B$ to be $\bigcup \bigcup R$ satisfies the statement, that is, $R \subset
+    \bigcup \bigcup R \times \bigcup \bigcup R$.
+\end{proof}
+Apply the axiom of specification to construct the smallest possible $A$ and $B$, as below. These are
+the \textit{projections} of $R$ onto the first and second coordinates respectively.
+\begin{align*}
+    A &= \{a: \text{ for some } b ((a, b) \in R)\}\\
+    B &= \{b: \text{ for some } a ((a, b) \in R)\}
+\end{align*}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
