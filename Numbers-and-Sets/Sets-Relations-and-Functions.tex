@@ -530,6 +530,28 @@ the \textit{projections} of $R$ onto the first and second coordinates respective
     B &= \{b: \text{ for some } a ((a, b) \in R)\}
 \end{align*}
 
+\section{Relations}
+A \textit{relation} captures some connection between objects. A \textit{binary relation} captures some
+connection between two objects. Specifically, a (binary) relation is a set of ordered pairs. For example,
+if $X$ is the set of men and $Y$ is the set of women, the relation could be the set of married couples,
+which is a subset of $X \times Y$. Looking at this from the opposite direction, a set is a relation if
+all of its elements are ordered pairs. We now introduce new notation: if $(x, y) \in R$, we write $x R y$.
+
+The simplest (and least interesting) example of a relation is the empty set. This is a set of ordered pairs
+as it doesn't contain any elements that are \textit{not} ordered pairs. Another example is the set of pairs $(x, y)$
+in $X \times X$ where $x = y$. This is simply the relation of equality in a set. The set of elements $(x, A)$ of $X \times \mathcal{P}(X)$ (that is,
+$A \subset X$) where $x \in A$ is the relation of belonging between elements of a set and its subsets.
+
+For relations, the projections onto the first and second coordinates are called the \textit{domain} and the \textit{range}
+respectively. Thus, in the example of married couple, the domain is the set of married men and the range is the
+set of married women. In the relation of equality, the range and domain are equal: $\text{ran} R = \text{dom} R = X$. In the
+relation of belonging, $\text{ran} R = X$ and $\text{dom} R = \mathcal{P}(X) - \{\emptyset\}$. The empty set has been removed
+as it doesn't contain any element $b$ for $a R b$. With the new notation,
+\begin{align*}
+    dom R &= \{a: \text{ for some } b \;(a R b)\}\\
+    ran R &= \{b: \text{ for some } a \;(a R b)\}
+\end{align*}
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
