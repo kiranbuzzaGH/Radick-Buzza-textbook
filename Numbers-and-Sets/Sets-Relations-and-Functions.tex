@@ -544,13 +544,73 @@ $A \subset X$) where $x \in A$ is the relation of belonging between elements of 
 
 For relations, the projections onto the first and second coordinates are called the \textit{domain} and the \textit{range}
 respectively. Thus, in the example of married couple, the domain is the set of married men and the range is the
-set of married women. In the relation of equality, the range and domain are equal: $\text{ran} R = \text{dom} R = X$. In the
-relation of belonging, $\text{ran} R = X$ and $\text{dom} R = \mathcal{P}(X) - \{\emptyset\}$. The empty set has been removed
+set of married women. In the relation of equality, the range and domain are equal: $\text{ran } R = \text{dom } R = X$. In the
+relation of belonging, $\text{ran } R = X$ and $\text{dom } R = \mathcal{P}(X) - \{\emptyset\}$. The empty set has been removed
 as it doesn't contain any element $b$ for $a R b$. With the new notation,
 \begin{align*}
-    dom R &= \{a: \text{ for some } b \;(a R b)\}\\
-    ran R &= \{b: \text{ for some } a \;(a R b)\}
+    dom \;R &= \{a: \text{ for some } b \;(a R b)\}\\
+    ran \;R &= \{b: \text{ for some } a \;(a R b)\}
 \end{align*}
+
+If a relation is a subset of $X \times Y$, it is said to be \textit{from $X$ to $Y$}. If a relation is
+a subset of $X \times X$, it is said to be \textit{in} $X$.
+
+For a relation $R$ in $X$, it is \textit{reflexive} if $x R x$ for every $x \in X$. It is \textit{symmetric}
+if $x R y \implies y R x$. It is \textit{transitive} if $x R y \text{ and } y R z \implies x R z$. A relation for
+which all three properties hold is an \textit{equivalence relataion}. The simplest example is equality in $X$:
+clearly $x = x$ for every $x \in X$ so $x R x$ for all $x$. $x = y \implies y = x$ so $x R y \implies y R x$.
+$x = y \text{ and } y = z \implies x = z$ so $x R y \text{ and } y R z \implies x R z$. Another example is the Cartesian
+product $X \times Y$. Note that the empty set is vacuously an equivalence relation. An example of a relation that is not an equivalence relation is the set of ordered pairs
+$(x, y)$ in $\mathbb{R}$ such that $x \leq y$. Clearly, $x \leq x$ for all $x \in X$; $x \leq y$ and $y \leq z \implies
+x \leq z$ is also obvious. However, $x \leq y$ doesn't imply $y \leq x$ (only when equality holds does this
+implication hold). Thus, this relation isn't symmetric and, as such, isn't an equivalence relation.
+
+Given an equivalence relation $R$ in $X$, for some $x \in X$, the set of elements $y$ such that $x R y$
+is called an \textit{equivalence class}. Note that, due to relflexivity, $x$ is always in this set. Thus,
+every element in $X$ is in some equivalence class. Denote the equivalence class of $x$ as $x / R$. Denote the
+set of all equivalence classes of $R$ as $X / R$. The set of equivalence classes can be seen to be a valid set
+by applying the axiom of specification to the power set of $X$, $\mathcal{P}(X)$:
+\begin{equation*}
+    X / R = \{Y \in \mathcal{P}(X): \exists \;x \in X \text{ such that } (\forall y \in Y, x R y) \text{ and } (\forall y \in X, \text{ if }
+    x R y, \text{ then } y \in Y)\}
+\end{equation*}
+That is, every element in $X/R$ is a subset $Y$ for which all the elements in $Y$ are in a equivalence
+class with some $x$, and if an element in $X$ is in an equivalence class with $x$, it is necessarily
+also in the subset $Y$.
+
+A \textit{partition} of $X$ is a collection (or set) $\mathcal{C}$ of disjoint subsets whose union is exactly $X$. That is, every
+element of $X$ is contained in exactly one of the subsets in the partition. Such a collection can be said to induce
+an equivalence relation: the relation is the set $x \;X/\mathcal{C} \;y$ where $x$ and $y$ are in the same subset in $\mathcal{C}$.
+
+\begin{remark}
+    Given an equivalence relation $R$ in $X$, the set of equivalence classes of $R$ is a partition $\mathcal{C}$
+    of $X$ which induces the same equivalence relation. Conversely, for some partition $\mathcal{C}$ of $X$,
+    the relation induced is an equivalence relation with the set of its equivalence classes being the same
+    as the initial partition $\mathcal{C}$.
+\end{remark}
+\begin{proof}
+    We shall prove the second statement first, as this is trivial. For a partition $\mathcal{C}$, consider
+    the induced relation: it induces $x \;X/\mathcal{C}\;y$ where $x$ and $y$ are in the same subset in $\mathcal{C}$.
+    Thus, $x \;X/\mathcal{C}\;x$ as an element always belongs to the same subset as itself, so the
+    induced relation is reflexive. Similarly, if
+    $x \;X/\mathcal{C}\;y$, then both $x$ and $y$ are in the same subset. Thus, $y \;X/\mathcal{C}\;x$
+    is also true, and the induced relation is symmetric. If $x \;X/\mathcal{C}\;y$ and $y \;X/\mathcal{C}\;z$,
+    then $x$, $y$ and $z$ are all in the same subset in $\mathcal{C}$. Thus, $x \;X/\mathcal{C}\;z$ so the induced
+    relation is transitive. Therefore the induced relation is an equivalence relation. By construction, the set of equivalence
+    classes is exactly $\mathcal{C}$ (as two elements are only related if they are in the same subset).
+
+    Now for the first statement. Consider the set of equivalence classes of some equivalence relation $R$
+    in $X$. The equivalence class of $x$ is the set of elements $y$ such that $x R y$, so every element is in
+    at least one equivalence class (recall that reflexivity implies that the equivalence class of $x$ contains at
+    least $x$). Let $x$ be in the equivalence class of some other element, $x_1 \in X$. Thus, $x_1 R y$. Due to the
+    symmetry of equivalence relations, $x R x_1$ so the equivalence class of $x$ and $x_1$ are the same. Thus, each element
+    in $X$ is also in exactly one equivalence class. Thus, the set of equivalence classes is a partition
+    of $X$. If two elements are in the set in this collection, then by definition, they stand in relation to each
+    other. Thus we can conclude that this partition induces the equivalence relation $R$.
+\end{proof}
+
+Thus, $R$ and $X/\mathcal{C}$ represent the same relation, and $X/R$ and $\mathcal{C}$ represent the
+same set of equivalence classes.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
